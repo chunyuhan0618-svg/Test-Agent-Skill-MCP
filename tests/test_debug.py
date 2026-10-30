@@ -3,6 +3,7 @@ import asyncio
 import inspect
 import json
 import time
+import threading
 import unittest
 from pathlib import Path
 from unittest.mock import AsyncMock, patch
@@ -128,6 +129,46 @@ class DebugAPITests(unittest.TestCase):
             client.post(f"/api/debug/{sid}/next",json={"seq":2})
             data=self.wait_state(client,sid,lambda d:d["status"]=="completed")
             self.assertEqual(list(data["results"]),["zh-en"])
+
+    def test_continue_finishes_all_selected_pairs_with_real_mcp(self):
+        requests=[]
+        real_client=httpx.AsyncClient
+        def handle(request):
+            requests.append(request)
+            return httpx.Response(200,json={"responseStatus":200,"responseData":{"translatedText":"译文"}})
+        def factory(**kwargs):
+            return real_client(transport=httpx.MockTransport(handle),**kwargs)
+        with TestClient(app) as client, patch("free_translation.httpx.AsyncClient",side_effect=factory):
+            sid=client.post("/api/debug/start",json={**PAYLOAD,"pairs":["zh-ja","zh-en","en-ja"]}).json()["id"]
+            self.wait_state(client,sid,lambda d:d["status"]=="paused")
+            response=client.post(f"/api/debug/{sid}/continue",json={})
+            self.assertEqual(response.status_code,200)
+            self.assertTrue(response.json()["run_to_end"])
+            data=self.wait_state(client,sid,lambda d:d["status"] in ("completed","error"))
+            self.assertEqual(data["status"],"completed",data)
+            self.assertEqual(set(data["results"]),{"zh-ja","zh-en","en-ja"})
+            self.assertEqual(len(requests),4)
+            self.assertTrue(all(e["status"]=="completed" for e in data["events"]))
+            self.assertEqual({e["kind"] for e in data["events"]},{"Agent","Skill","MCP","Engine"})
+            self.assertEqual(client.post(f"/api/debug/{sid}/continue",json={}).status_code,409)
+
+    def test_continue_while_running_still_allows_cancel(self):
+        started=threading.Event()
+        async def slow_pipeline(*args):
+            started.set()
+            await asyncio.Event().wait()
+        with TestClient(app) as client, patch("web.compare_free",side_effect=slow_pipeline) as provider:
+            sid=client.post("/api/debug/start",json=PAYLOAD).json()["id"]
+            self.wait_state(client,sid,lambda d:d["status"]=="paused")
+            client.post(f"/api/debug/{sid}/next",json={"seq":1})
+            self.assertTrue(started.wait(timeout=2))
+            response=client.post(f"/api/debug/{sid}/continue",json={})
+            self.assertEqual(response.status_code,200)
+            self.assertTrue(response.json()["run_to_end"])
+            result=client.post(f"/api/debug/{sid}/cancel",json={}).json()
+            self.assertEqual(result["status"],"cancelled")
+            self.assertEqual(result["results"],{})
+            self.assertEqual(provider.call_count,1)
 
     def test_real_free_pipeline_pauses_at_skill_provider_and_mcp(self):
         requests=[]

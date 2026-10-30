@@ -58,6 +58,7 @@ class DebugSession:
         self.gate = None
         self.task = None
         self.updated = time.monotonic()
+        self.run_to_end = False
 
     async def checkpoint(self, kind, title, detail, location):
         if self.events and self.events[-1]["status"] == "running":
@@ -65,6 +66,12 @@ class DebugSession:
         event = {"seq": len(self.events)+1, "kind":kind, "title":title,
                  "detail":detail, "pair":self.pair, "status":"paused", **location}
         self.events.append(event)
+        if self.run_to_end:
+            self.status = event["status"] = "running"
+            self.updated = time.monotonic()
+            # 保留真实流程记录，并让出调度机会，使取消请求仍可处理。
+            await asyncio.sleep(0)
+            return
         self.status = "paused"
         self.updated = time.monotonic()
         self.gate = asyncio.Event()
@@ -87,7 +94,15 @@ class DebugSession:
     def snapshot(self):
         return {"id": self.id, "status":self.status, "pair":self.pair,
                 "events":self.events, "results":self.results,
-                "errors":self.errors, "error":self.error}
+                "errors":self.errors, "error":self.error, "run_to_end":self.run_to_end}
+
+    def continue_to_end(self):
+        if self.status not in ("paused", "running"):
+            return False
+        self.run_to_end = True
+        if self.status == "paused":
+            self.advance(self.events[-1]["seq"])
+        return True
 
     def finish(self, status="completed", error=""):
         self.status, self.error = status, error

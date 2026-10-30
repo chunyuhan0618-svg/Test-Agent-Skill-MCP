@@ -3,7 +3,7 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>言间 · 中日英对照工作台</title><link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="/static/debug.css"><script src="/static/debug.js" defer></script><script src="/static/app.js" defer></script></head>
 <body>
 <main>
-  <header><a class="brand" href="/">言间<span>LINGUA WORKSPACE</span></a><span class="version">V3 · 流程调试</span></header>
+  <header><a class="brand" href="/">言间<span>LINGUA WORKSPACE</span></a><span class="version">v3.1.0 · 流程调试</span></header>
   <section class="intro"><p class="eyebrow">WORDS, WITH CONTEXT.</p><h1>跨越语言，读懂意思。</h1><p>一份原文，三组对照。让译文、语气与用法，在同一画面里清晰展开。</p></section>
   <div class="debug-toolbar"><label><input id="debug-toggle" type="checkbox"> 显示流程图 · 单步调试</label><span>勾选后，点击“下一步”才执行当前步骤。</span></div>
   <div id="workspace" class="workspace"><div class="translation-space">
@@ -28,15 +28,18 @@
     <article class="result panel" data-pair="en-ja"><div class="result-head"><div><span class="pair-index">03 / JA · EN</span><h2>日英对照</h2></div><span class="badge">待翻译</span></div><div class="result-body"><div class="empty"><span>日 / EN</span><p>看懂语序、敬语与微妙的语气。</p></div></div></article>
   </section>
   </div>
+  <div id="debug-resizer" class="debug-resizer" role="separator" aria-label="调整流程图宽度" aria-orientation="vertical" aria-valuemin="30" aria-valuemax="70" aria-valuenow="50" tabindex="0" hidden><span></span></div>
   <aside id="debug-panel" class="debug-panel panel" hidden aria-label="程序执行流程">
+    <div class="debug-scroll" id="debug-scroll">
     <div class="debug-heading"><div><p class="eyebrow">LIVE EXECUTION</p><h2>看见程序如何工作</h2></div><span class="badge">DEBUG</span></div>
     <p class="debug-intro">Agent 负责推进，Skill 提供规则，MCP 连接工具。免费模式由程序编排，不会调用大模型。</p>
     <div class="debug-legend"><span>Agent</span><span>Skill</span><span>MCP</span><span>Engine</span></div>
     <p id="debug-state" role="status" aria-live="polite">准备就绪。开始翻译后，将停在第一步。</p>
-    <div class="debug-controls"><button id="debug-next" type="button" disabled>下一步 →</button><button id="debug-cancel" type="button" disabled>结束调试</button></div>
     <ol id="flow-list" class="flow-list" aria-label="实际执行步骤"><li class="flow-placeholder">开始翻译 → Agent 选择组合 → Skill → 翻译引擎 → MCP → Agent 交付结果</li></ol>
     <section class="code-view" aria-label="当前步骤代码"><h3 id="code-location">等待执行位置</h3><p id="code-detail">每次暂停会显示真实源文件及下一段代码的起始行。点击流程节点可查看已执行步骤。</p><pre id="debug-code"># 勾选需要的组合，然后开始翻译。</pre><details id="skill-resource" hidden><summary>查看本步 Skill 原文</summary><pre id="skill-source"></pre></details></section>
     <p class="debug-footnote">关键步骤断点，不是逐条 Python 语句调试；未点击前不会执行该步骤。暂停 5 分钟自动结束。</p>
+    </div>
+    <div class="debug-controls"><button id="debug-next" type="button" disabled>下一步 →</button><button id="debug-continue" type="button" disabled>一步到底</button><button id="debug-cancel" type="button" disabled>结束调试</button></div>
   </aside></div>
   <footer><span>言间 · TRANSLATE WITH UNDERSTANDING</span><span>Agent + Skills + MCP</span></footer>
 </main>

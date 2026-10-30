@@ -180,6 +180,10 @@ async def debug_control(request):
     action = request.path_params.get("action", "status")
     if request.method == "GET" and action == "status":
         return JSONResponse(session.snapshot())
+    if request.method == "POST" and action == "continue":
+        if not session.continue_to_end():
+            return JSONResponse({"error":"会话已结束，无法继续。"},status_code=409)
+        return JSONResponse(session.snapshot())
     if request.method == "POST" and action == "cancel":
         if session.task and not session.task.done():
             session.task.cancel()
