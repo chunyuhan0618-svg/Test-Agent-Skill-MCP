@@ -1,3 +1,5 @@
 mcp==1.26.0
 openai==2.54.0
 python-dotenv==1.2.4
+starlette==1.10.0
+uvicorn==0.54.0

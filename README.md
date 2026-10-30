@@ -1,4 +1,33 @@
-# 中日英翻译 Agent：Skills + MCP 完整最小示例
+# 言间 · 中日英翻译 Agent：网页版 V2 + Skills + MCP
+
+## V2 网页版快速开始
+
+第二版已提供本地独立运行的网页：**左侧中日对照、中间中英对照、右侧日英对照**。三组默认勾选，可取消任意组合；只会为选中的组合调用 Agent、Skill 和 MCP。
+
+已安装初版的 Windows 用户，在 PowerShell 执行：
+
+```powershell
+cd C:\AI-Study\Test-Agent-Skill-MCP
+git pull --ff-only
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe web.py
+```
+
+浏览器打开 **[http://127.0.0.1:8000](http://127.0.0.1:8000)**。保持终端运行，按 Ctrl+C 停止。端口被占用时，运行 `python web.py --port 8002` 并打开对应地址。
+
+1. 选择模型，或选择“自定义模型 ID”填写账号可用的 OpenAI 模型。
+2. 输入 API Key。网页版直接使用页面输入，不需要填写 `.env`。
+3. 输入原文，并选择中文、日文或英文作为原文语言。
+4. 保持所需对照组合勾选，点击“开始对照翻译”。
+5. 每栏显示两种语言、意思解释、关键词与用法、术语参考。
+
+一份原文可生成三组对照。例如中文原文的日英栏会直接生成日文、英文，而不先串行转译。该栏使用日英 Skill 分析对应表达。每栏独立生成，因此不同栏中的同语言译文可能存在措辞差异。
+
+当前仅接入 OpenAI API。下拉框中的预置模型不保证你的账号都有权限；所选模型需要支持 Responses、function calling、Structured Outputs。API Key 仅在当前页面及请求内存中使用，不写入磁盘、Cookie 或 localStorage；原文、选中的 Skill 和查询结果会发送至 OpenAI。页面关闭或刷新后需重新输入。
+
+这是带本地 Python 后端的独立网页应用，无需 Codex、Node.js 或前端构建；正常翻译仍需要联网和 API Key。默认只监听本机地址，不是公开部署服务，也不是无需 Python 的 exe。
+
+完整架构、接口和验证说明见 **[V2 网页版说明](docs/web-v2.md)**。下文保留初版 CLI 的使用方法。
 
 一个 Python 命令行项目，演示 **一个 Agent 根据语言方向加载三个 Skill 之一，再通过真实 MCP 查询术语，并调用模型完成翻译和意思解释**。
 
@@ -75,11 +104,13 @@ Skill 以文本指令进入模型上下文。它不是独立模型，也不是�
 ```powershell
 git clone https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP.git
 cd Test-Agent-Skill-MCP
-py -3.12 -m venv .venv
+python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
 后续命令使用 `python` 时，请替换为 `.\.venv\Scripts\python.exe`，或先激活虚拟环境。直接使用解释器路径不需要更改 PowerShell 执行策略。
+
+若提示 `Python was not found`，先从 [Python 官方网站](https://www.python.org/downloads/windows/) 安装 Python，勾选 **Add python.exe to PATH**，关闭并重新打开 PowerShell，运行 `python --version` 验证。若只有 `py` 可用，也可以使用 `py -3.12 -m venv .venv`。
 
 ### macOS / Linux
 

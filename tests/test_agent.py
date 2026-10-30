@@ -172,9 +172,12 @@ class SDKContractTests(unittest.IsolatedAsyncioTestCase):
             async with httpx.AsyncClient(transport=httpx.MockTransport(handle)) as http:
                 async with AsyncOpenAI(api_key="local-test-only", http_client=http) as client:
                     result = await run_model_loop(client, session, tools,
-                        TranslationRequest("follow up", "en", "zh"), "skill", "test-model")
+                        TranslationRequest("follow up", "en", "zh"), "skill", "test-model",
+                        output_schema={"type": "object", "properties": {},
+                                       "required": [], "additionalProperties": False})
         self.assertEqual(result, "SDK contract verified")
         self.assertEqual(len(requests), 2)
+        self.assertEqual(requests[0]["text"]["format"]["type"], "json_schema")
         self.assertEqual(requests[0]["tools"][0]["parameters"]["type"], "object")
         tool_output = requests[1]["input"][-1]
         self.assertEqual(tool_output["call_id"], "call_sdk")

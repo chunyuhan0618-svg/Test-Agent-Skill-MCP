@@ -28,7 +28,7 @@ def trace(message: str, enabled: bool):
 
 
 async def run_model_loop(client, session, tools, request, instructions, model,
-                         verbose=False, max_rounds=5) -> str:
+                         verbose=False, max_rounds=5, output_schema=None) -> str:
     """保留完整 output，包括推理项；每个 call_id 都要回传对应工具结果。"""
     history = [{"role": "user", "content": json.dumps(request.__dict__, ensure_ascii=False)}]
     allowed = {t["name"] for t in tools}
@@ -40,6 +40,8 @@ async def run_model_loop(client, session, tools, request, instructions, model,
             # 教学模式首轮必须查询，保证能观察到真实 MCP 调用。
             tool_choice={"type": "function", "name": "lookup_term"}
             if round_number == 0 else "auto",
+            **({"text": {"format": {"type": "json_schema", "name": "comparison",
+                "strict": True, "schema": output_schema}}} if output_schema else {}),
         )
         history.extend(response.output)
         calls = [item for item in response.output if item.type == "function_call"]

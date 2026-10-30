@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>言间 · 中日英对照工作台</title><link rel="stylesheet" href="/static/style.css"><script src="/static/app.js" defer></script></head>
+<body>
+<main>
+  <header><a class="brand" href="/">言间<span>LINGUA WORKSPACE</span></a><span class="version">V2 · 三语对照</span></header>
+  <section class="intro"><p class="eyebrow">WORDS, WITH CONTEXT.</p><h1>跨越语言，读懂意思。</h1><p>一份原文，三组对照。让译文、语气与用法，在同一画面里清晰展开。</p></section>
+  <form id="form">
+    <section class="settings panel" aria-label="模型设置">
+      <div><label for="model">大语言模型 <span>OPENAI</span></label><select id="model"><option value="gpt-4.1-mini">GPT-4.1 mini</option><option value="gpt-4.1">GPT-4.1</option><option value="gpt-4o-mini">GPT-4o mini</option><option value="custom">自定义模型 ID…</option></select></div>
+      <div id="custom-wrap" hidden><label for="custom-model">自定义模型 ID</label><input id="custom-model" placeholder="输入账号可用的模型 ID" maxlength="120"></div>
+      <div class="key-field"><label for="api-key">API Key <span>仅本次使用</span></label><div class="key-input"><input id="api-key" type="password" placeholder="输入你的 OpenAI API Key" autocomplete="off" required maxlength="512"><button id="toggle-key" type="button" aria-label="显示 API Key" aria-pressed="false">显示</button></div></div>
+    </section>
+    <section class="composer panel">
+      <div class="composer-head"><label for="text">待翻译原文</label><label class="source-label" for="source">原文语言 <select id="source"><option value="zh">中文</option><option value="ja">日本語</option><option value="en">English</option></select></label></div>
+      <textarea id="text" maxlength="10000" required placeholder="在这里输入一句话、一封邮件，或一段想读懂的内容…"></textarea>
+      <div class="composer-foot"><button type="button" id="sample">试试示例 ↗</button><span id="count">0 / 10,000</span></div>
+    </section>
+    <div class="action-bar"><div><p>选择对照组合</p><div class="choices"><label><input type="checkbox" value="zh-ja" checked> 中日对照</label><label><input type="checkbox" value="zh-en" checked> 中英对照</label><label><input type="checkbox" value="en-ja" checked> 日英对照</label></div></div><button class="primary" id="submit" type="submit">开始对照翻译 <span>→</span></button></div>
+    <p class="hint">取消勾选的组合不会发起翻译。API Key 不保存；模型需支持工具调用与结构化输出。</p>
+  </form>
+  <p id="status" role="status" aria-live="polite">已选择 3 组对照，等待输入。</p>
+  <section class="results" aria-label="翻译对照结果">
+    <article class="result panel" data-pair="zh-ja"><div class="result-head"><div><span class="pair-index">01 / ZH · JA</span><h2>中日对照</h2></div><span class="badge">待翻译</span></div><div class="result-body"><div class="empty"><span>中 / 日</span><p>中文与日文，准确表达每一层意思。</p></div></div></article>
+    <article class="result panel" data-pair="zh-en"><div class="result-head"><div><span class="pair-index">02 / ZH · EN</span><h2>中英对照</h2></div><span class="badge">待翻译</span></div><div class="result-body"><div class="empty"><span>中 / EN</span><p>从字面到语境，找到自然的表达。</p></div></div></article>
+    <article class="result panel" data-pair="en-ja"><div class="result-head"><div><span class="pair-index">03 / JA · EN</span><h2>日英对照</h2></div><span class="badge">待翻译</span></div><div class="result-body"><div class="empty"><span>日 / EN</span><p>看懂语序、敬语与微妙的语气。</p></div></div></article>
+  </section>
+  <footer><span>言间 · TRANSLATE WITH UNDERSTANDING</span><span>Agent + Skills + MCP</span></footer>
+</main>
+</body></html>
