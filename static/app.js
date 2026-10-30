@@ -51,12 +51,18 @@ $('#form').addEventListener('submit',async(event)=>{
   $('#submit').textContent='正在对照翻译…';$('#status').textContent=`正在翻译 ${enabled.length} 组，请稍候…`;
   enabled.forEach(pair=>message(pair,'正在理解原文、查询术语并生成对照…','翻译中'));
   let succeeded=0;
+  let ending='';
+  if($('#debug-toggle').checked){
+    try{({succeeded,ending}=await runDebug({text,source,pairs:enabled,model,api_key}));}
+    catch(error){ending=error.message;enabled.forEach(pair=>message(pair,error.message,'失败',true));}
+  }else{
   await Promise.all(enabled.map(async(pair)=>{
     try{
       const response=await fetch('/api/compare',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,source,pair,model,api_key})});
       const data=await response.json();if(!response.ok)throw new Error(data.error||'翻译失败，请稍后重试。');render(data);succeeded++;
     }catch(error){message(pair,error.message||'连接失败，请确认本地网页服务正在运行。','失败',true);}
   }));
+  }
   document.querySelectorAll('form input,form textarea,form select,form button').forEach(x=>x.disabled=false);
-  busy=false;$('#submit').textContent='开始对照翻译 →';$('#status').textContent=`已完成 ${succeeded} / ${enabled.length} 组对照。${succeeded<enabled.length?'请检查失败栏位的提示。':''}`;
+  busy=false;$('#submit').textContent='开始对照翻译 →';$('#status').textContent=`已完成 ${succeeded} / ${enabled.length} 组对照。${ending||(succeeded<enabled.length?'请检查失败栏位的提示。':'')}`;
 });

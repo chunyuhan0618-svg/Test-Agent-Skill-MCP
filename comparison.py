@@ -6,6 +6,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from agent import TranslationRequest, run_model_loop
 from mcp_bridge import connect_mcp, to_openai_tool
 from skill_router import load_skill
+from debug_trace import step
 
 PAIRS = {"zh-ja": ("zh", "ja"), "zh-en": ("zh", "en"), "en-ja": ("ja", "en")}
 
@@ -21,6 +22,7 @@ class ComparisonResult(BaseModel):
 
 async def compare(text: str, source: str, pair: str, model: str, api_key: str) -> dict:
     left, right = PAIRS[pair]
+    await step("Skill", "加载双语 Skill", f"读取 {pair} 的专业规则及共享规则，准备放入模型上下文。", resource=f"skills/{pair}/SKILL.md")
     _, instructions = load_skill(left, right)
     # 若原文属于第三种语言，直接由原文生成两种译文，避免串行转译误差。
     target = right if source == left else left
@@ -36,6 +38,7 @@ explanation、keywords、references 使用中文，分别解释意思、关键�
 对照的语序、语气、礼貌等分析应用当前选中 Skill。
 """
     async with connect_mcp() as session:
+        await step("MCP", "发现可用工具", "通过 tools/list 获取真实 MCP Server 提供的工具定义。")
         tools = [to_openai_tool(t) for t in (await session.list_tools()).tools
                  if t.name == "lookup_term"]
         if not tools:
@@ -45,6 +48,7 @@ explanation、keywords、references 使用中文，分别解释意思、关键�
                 client, session, tools, request, instructions, model,
                 output_schema=ComparisonResult.model_json_schema(),
             )
+    await step("Agent", "校验结构化译文", "检查两种语言文本、意思解释、关键词和术语参考字段。")
     result = ComparisonResult.model_validate_json(raw).model_dump()
     # 原文不依赖模型复写，保证可逐字对照。
     if source == left:

@@ -1,5 +1,6 @@
 """本地独立网页入口：python web.py。只绑定本机，不存储 API Key。"""
 import asyncio
+from contextlib import asynccontextmanager
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, SecretStr, ValidationError
@@ -14,6 +15,14 @@ from starlette.staticfiles import StaticFiles
 from comparison import compare
 from free_translation import compare_free, FreeTranslationError
 from skill_router import ROOT
+from debug_trace import CURRENT, DebugSessions, DebugPauseTimeout, step
+
+debug_sessions = DebugSessions()
+
+
+def is_pause_timeout(exc):
+    return isinstance(exc, DebugPauseTimeout) or (isinstance(exc, BaseExceptionGroup)
+        and any(is_pause_timeout(child) for child in exc.exceptions))
 
 
 class CompareInput(BaseModel):
@@ -25,10 +34,17 @@ class CompareInput(BaseModel):
     api_key: SecretStr = Field(default=SecretStr(""), max_length=512)
 
 
+class DebugInput(CompareInput):
+    pair: Literal["zh-ja", "zh-en", "en-ja"] = "zh-ja"
+    pairs: list[Literal["zh-ja", "zh-en", "en-ja"]] = Field(min_length=1, max_length=3)
+
+
 def error_message(exc: Exception) -> tuple[int, str]:
     # AnyIO 可能将 SDK 错误包在 ExceptionGroup 中；从不回显请求或密钥。
     if isinstance(exc, BaseExceptionGroup):
         return error_message(exc.exceptions[0])
+    if isinstance(exc, DebugPauseTimeout):
+        return 408, "调试暂停超过 5 分钟，会话已结束，请重新开始。"
     if isinstance(exc, FreeTranslationError):
         return 503, str(exc)
     status = getattr(exc, "status_code", None)
@@ -104,12 +120,122 @@ async def compare_endpoint(request: Request):
         return JSONResponse({"error": message}, status_code=status)
 
 
-app = Starlette(routes=[Route("/", index), Route("/api/compare", compare_endpoint, methods=["POST"]),
+async def run_debug(session, data):
+    token = CURRENT.set(session)
+    try:
+        async with asyncio.timeout(1200):
+            for pair in data.pairs:
+                session.pair = pair
+                try:
+                    await step("Agent", "安排本组翻译", "Agent 编排程序按勾选顺序处理组合；此处选择免费或大模型执行路径。")
+                    key = data.api_key.get_secret_value().strip()
+                    if data.model and key:
+                        result = await compare(data.text, data.source, pair, data.model, key)
+                    else:
+                        result = await compare_free(data.text, data.source, pair)
+                    await step("Agent", "交付本组结果", "把本组的双语文本和说明交给网页；其他未勾选组合不运行。")
+                    session.results[pair] = result
+                except DebugPauseTimeout:
+                    raise
+                except Exception as exc:
+                    if is_pause_timeout(exc):
+                        raise
+                    session.errors[pair] = error_message(exc)[1]
+                    if session.events:
+                        session.events[-1]["status"] = "error"
+            session.finish("completed")
+    except asyncio.CancelledError:
+        session.finish("cancelled")
+        raise
+    except Exception as exc:
+        session.finish("error", error_message(exc)[1])
+    finally:
+        CURRENT.reset(token)
+
+
+async def debug_start(request):
+    body = bytearray()
+    async for chunk in request.stream():
+        body.extend(chunk)
+        if len(body)>80000:
+            return JSONResponse({"error":"请求内容过大。"},status_code=413)
+    try:
+        data = DebugInput.model_validate_json(body)
+        if not data.text.strip() or len(set(data.pairs))!=len(data.pairs):
+            raise ValueError("invalid request")
+        if not (data.model and data.api_key.get_secret_value().strip()) and len(data.text)>1000:
+            return JSONResponse({"error":"免费模式每次最多 1000 字符。"},status_code=422)
+        session = debug_sessions.create()
+    except (ValueError, ValidationError):
+        return JSONResponse({"error":"调试请求无效，或现有会话过多；请检查输入并结束旧会话。"},status_code=422)
+    session.task = asyncio.create_task(run_debug(session, data))
+    return JSONResponse({"id":session.id},status_code=201)
+
+
+async def debug_control(request):
+    debug_sessions.reap()
+    session = debug_sessions.items.get(request.path_params["session_id"])
+    if session is None:
+        return JSONResponse({"error":"调试会话不存在或已过期，请重新开始。"},status_code=404)
+    action = request.path_params.get("action", "status")
+    if request.method == "GET" and action == "status":
+        return JSONResponse(session.snapshot())
+    if request.method == "POST" and action == "cancel":
+        if session.task and not session.task.done():
+            session.task.cancel()
+            await asyncio.gather(session.task, return_exceptions=True)
+        session.finish("cancelled")
+        return JSONResponse(session.snapshot())
+    if request.method == "POST" and action == "next":
+        # next 请求只需小整数，限制流式读取，避免无限大小的控制正文。
+        body = bytearray()
+        async for chunk in request.stream():
+            body.extend(chunk)
+            if len(body)>256:
+                return JSONResponse({"error":"控制请求过大。"},status_code=413)
+        try:
+            import json
+            seq = json.loads(body)["seq"]
+            if type(seq) is not int:
+                raise ValueError("invalid sequence")
+        except (ValueError, KeyError, TypeError):
+            return JSONResponse({"error":"步骤序号无效。"},status_code=422)
+        if not session.advance(seq):
+            return JSONResponse({"error":"该步骤已放行或尚未暂停，请等待最新状态。"},status_code=409)
+        return JSONResponse(session.snapshot())
+    return JSONResponse({"error":"未知调试操作。"},status_code=405)
+
+
+@asynccontextmanager
+async def lifespan(app):
+    async def cleanup():
+        while True:
+            await asyncio.sleep(30)
+            debug_sessions.reap()
+    cleaner = asyncio.create_task(cleanup())
+    try:
+        yield
+    finally:
+        cleaner.cancel()
+        await asyncio.gather(cleaner, return_exceptions=True)
+        await debug_sessions.close()
+
+
+app = Starlette(lifespan=lifespan, routes=[Route("/", index), Route("/api/compare", compare_endpoint, methods=["POST"]),
+                        Route("/api/debug/start", debug_start, methods=["POST"]),
+                        Route("/api/debug/{session_id}", debug_control, methods=["GET"]),
+                        Route("/api/debug/{session_id}/{action}", debug_control, methods=["POST"]),
                         Mount("/static", StaticFiles(directory=ROOT / "static"), name="static")])
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1", "testserver"])
 
 
 async def response_headers(request, call_next):
+    if request.url.path.startswith("/api/debug/") and request.method == "POST":
+        origin = request.headers.get("origin")
+        if origin and origin != f"{request.url.scheme}://{request.url.netloc}":
+            return JSONResponse({"error":"仅接受同源页面请求。"}, status_code=403)
+        if request.headers.get("content-type", "").split(";")[0] != "application/json":
+            return JSONResponse({"error":"请求必须为 JSON。"},status_code=415)
     response = await call_next(request)
     response.headers["Cache-Control"] = "no-store"
     response.headers["X-Content-Type-Options"] = "nosniff"

@@ -23,7 +23,7 @@ class WebTests(unittest.TestCase):
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
         self.assertIn("中日对照", response.text)
-        self.assertEqual(response.text.count('type="checkbox"'), 3)
+        self.assertEqual(response.text.count('type="checkbox"'), 4)
         self.assertEqual(response.text.count('value="zh-ja" checked'), 1)
         self.assertEqual(response.headers["cache-control"], "no-store")
         for path in ["/static/app.js", "/static/style.css"]:

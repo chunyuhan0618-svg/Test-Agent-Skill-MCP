@@ -7,6 +7,7 @@ import httpx
 from comparison import PAIRS
 from mcp_bridge import call_lookup, connect_mcp
 from skill_router import load_skill
+from debug_trace import step
 
 CODES = {"zh": "zh-CN", "ja": "ja", "en": "en"}
 
@@ -46,6 +47,7 @@ def chunks(text: str, limit=500) -> list[str]:
 
 async def translate_text(client, text: str, source: str, target: str) -> str:
     if source == target:
+        await step("Agent", "保留原文", f"目标语言 {target} 就是原文语言，不发送外部翻译请求。")
         return text
     output = []
     for segment in chunks(text):
@@ -53,6 +55,7 @@ async def translate_text(client, text: str, source: str, target: str) -> str:
             output.append(segment)
             continue
         try:
+            await step("Engine", "请求免费翻译", f"将当前分句从 {source} 翻译为 {target}；调用 MyMemory，消耗免费服务额度，不调用大模型。")
             response = await client.get("https://api.mymemory.translated.net/get", params={
                 "q": segment, "langpair": f"{CODES[source]}|{CODES[target]}", "mt": "1",
             })
@@ -93,6 +96,7 @@ async def compare_free(text: str, source: str, pair: str) -> dict:
     if len(text) > 1000:
         raise FreeTranslationError("免费模式每次最多 1000 字符，请缩短原文后重试。")
     left, right = PAIRS[pair]
+    await step("Skill", "读取组合 Skill", f"读取 {pair} 技能文件以展示组合规则；免费引擎不理解或执行大模型指令。", resource=f"skills/{pair}/SKILL.md")
     load_skill(left, right)  # 保留相同的组合路由；不声称免费引擎能执行模型指令。
     async with httpx.AsyncClient(timeout=25, follow_redirects=False) as client:
         # 两种目标语言均直接从原文翻译，原文语言不访问外部服务。
@@ -101,6 +105,7 @@ async def compare_free(text: str, source: str, pair: str) -> dict:
     target = right if source == left else left
     async with connect_mcp() as session:
         glossary = await call_lookup(session, {"query":text, "source":source, "target":target})
+    await step("Agent", "整理词义与用法", "由程序将 MCP 命中的本地资料整理为说明；这不是大模型生成的语义分析。")
     notes = [entry["note"] for entry in glossary["matches"]]
     references = [f"{entry['id']}：{' / '.join(entry['target_terms'])}" for entry in glossary["matches"]]
     return {

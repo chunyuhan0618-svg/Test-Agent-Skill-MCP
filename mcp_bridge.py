@@ -8,6 +8,7 @@ from datetime import timedelta
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from skill_router import ROOT
+from debug_trace import step
 
 
 @asynccontextmanager
@@ -18,10 +19,12 @@ async def connect_mcp():
         args=[str(ROOT / "mcp_server.py")],
         env={"PYTHONIOENCODING": "utf-8", "PYTHONUTF8": "1"},
     )
+    await step("MCP", "启动 MCP 子进程", "使用当前 Python 解释器运行 mcp_server.py，建立 stdio 协议通道。")
     async with stdio_client(params) as (reader, writer):
         async with ClientSession(
             reader, writer, read_timeout_seconds=timedelta(seconds=30)
         ) as session:
+            await step("MCP", "初始化 MCP 会话", "Client 与 Server 完成协议握手；尚未查询术语。")
             await session.initialize()
             yield session
 
@@ -38,6 +41,7 @@ def to_openai_tool(tool) -> dict:
 
 
 async def call_lookup(session, arguments: dict) -> dict:
+    await step("MCP", "调用术语工具", "通过 tools/call 执行 lookup_term；服务端 mcp_server.py 读取本地 glossary.json。")
     result = await asyncio.wait_for(
         session.call_tool("lookup_term", arguments=arguments), timeout=30
     )

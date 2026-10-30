@@ -5,6 +5,7 @@ from dataclasses import dataclass
 
 from mcp_bridge import call_lookup, connect_mcp, to_openai_tool
 from skill_router import LANGUAGES, load_skill
+from debug_trace import step, DebugPauseTimeout
 
 
 @dataclass(frozen=True)
@@ -19,7 +20,11 @@ class TranslationRequest:
             raise ValueError("原文不能为空，且不能超过 10000 个字符。")
         if self.explain not in LANGUAGES:
             raise ValueError("解释语言仅支持 zh、ja、en。")
-        load_skill(self.source, self.target)
+        # 校验不读取 Skill；真正加载发生在有明确调试节点的执行路径中。
+        if self.source not in LANGUAGES or self.target not in LANGUAGES:
+            raise ValueError("仅支持 zh、ja、en；本例要求明确指定源语言。")
+        if self.source == self.target:
+            raise ValueError("源语言与目标语言不能相同。")
 
 
 def trace(message: str, enabled: bool):
@@ -34,6 +39,7 @@ async def run_model_loop(client, session, tools, request, instructions, model,
     allowed = {t["name"] for t in tools}
     for round_number in range(max_rounds):
         trace(f"[model] round={round_number + 1}", verbose)
+        await step("Agent", "请求大模型", f"模型循环第 {round_number + 1} 轮：发送 Skill、请求和工具定义；此步骤可能产生 API 用量。")
         response = await client.responses.create(
             model=model, instructions=instructions, input=history,
             tools=tools, store=False, parallel_tool_calls=False,
@@ -44,6 +50,7 @@ async def run_model_loop(client, session, tools, request, instructions, model,
                 "strict": True, "schema": output_schema}}} if output_schema else {}),
         )
         history.extend(response.output)
+        await step("Agent", "检查模型返回", "判断模型请求的是工具调用还是最终译文；不展示隐藏推理内容。")
         calls = [item for item in response.output if item.type == "function_call"]
         if not calls:
             if response.status != "completed" or not response.output_text.strip():
@@ -63,9 +70,12 @@ async def run_model_loop(client, session, tools, request, instructions, model,
                 trace(f"[mcp] call lookup_term {json.dumps(args, ensure_ascii=False)}", verbose)
                 result = await call_lookup(session, args)
                 trace(f"[mcp] result {json.dumps(result, ensure_ascii=False)}", verbose)
+            except DebugPauseTimeout:
+                raise
             except (ValueError, TypeError, RuntimeError, TimeoutError) as exc:
                 # 参数错误作为工具结果回传，允许模型在轮数限制内修正。
                 result = {"error": str(exc)}
+            await step("Agent", "回传工具结果", "用 call_id 将 MCP 查询结果交给模型，随后进入下一轮。")
             history.append({
                 "type": "function_call_output", "call_id": call.call_id,
                 "output": json.dumps(result, ensure_ascii=False),
