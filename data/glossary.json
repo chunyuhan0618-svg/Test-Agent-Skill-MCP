@@ -1,0 +1,22 @@
+[
+  {
+    "id": "otsukaresama",
+    "terms": {"zh": ["辛苦了"], "ja": ["お疲れ様です"], "en": ["Thank you for your hard work"]},
+    "note": "日语职场寒暄；按语境可能译为你好、辛苦了，或省略。英文候选只适合确实在感谢付出的场景。"
+  },
+  {
+    "id": "review-request",
+    "terms": {"zh": ["请确认", "麻烦您确认一下"], "ja": ["ご確認をお願いいたします"], "en": ["Please review", "Could you please check"]},
+    "note": "请求查看或核实；review、check、confirm 的选择取决于希望对方执行的动作。"
+  },
+  {
+    "id": "follow-up",
+    "terms": {"zh": ["跟进"], "ja": ["フォローアップ", "進捗を確認する"], "en": ["follow up", "follow-up"]},
+    "note": "后续联系、追踪或处理；动词通常写 follow up，名词或形容词常写 follow-up。"
+  },
+  {
+    "id": "outlet",
+    "terms": {"zh": ["电源插座"], "ja": ["コンセント"], "en": ["power outlet", "electrical socket"]},
+    "note": "コンセント 是和制英语，不能译为 consent；outlet 和 socket 的使用有地区差异。"
+  }
+]
