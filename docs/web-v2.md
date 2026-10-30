@@ -113,6 +113,17 @@ MCP 仍从原文语言查询术语，选择对照组合中的一个不同语言�
 
 API Key 随 POST 正文发送到本机后端，再由 SDK 用于请求 OpenAI。静态页面不引用第三方脚本或字体。默认只绑定 127.0.0.1，拒绝其他来源的浏览器请求；关闭缓存，限制正文大小。若未来要公开部署，需要另行设计 HTTPS、认证、并发和额度控制，本版的本机启动不涉及公开部署。
 
+### HTTP 429：先区分额度与限速
+
+- `insufficient_quota` / `billing_hard_limit_reached`：检查 [API Billing](https://platform.openai.com/settings/organization/billing/overview)、可用余额、Key 所属组织/项目和用量限制；等待或重复点击通常无效。
+- `credit_balance_exhausted`：预付余额耗尽，检查 API Billing。
+- `organization_spend_limit_exceeded` / `project_spend_limit_exceeded`：组织或项目消费上限已达到，核对对应设置。
+- `organization_usage_limit_exceeded`：组织用量上限已达到，核对或申请提高限制。
+- `rate_limit_exceeded` / `slow_down`：在 [Limits](https://platform.openai.com/settings/organization/limits) 查看限制，按服务端等待提示稍后重试，先只勾选一组并缩短原文。
+- 未返回可识别代码：页面保留“无法确定”提示，不仅凭 429 就判断账户没余额。
+
+原版合并了两种提示；更新后按 SDK 的错误 code/type 分类，绝不向页面回显原始错误、请求正文或 Key。分类回归测试使用真实 SDK 错误类型与模拟响应，不调用线上 API，也不能读取你的账户余额。
+
 ## 6. 验证
 
 ```powershell

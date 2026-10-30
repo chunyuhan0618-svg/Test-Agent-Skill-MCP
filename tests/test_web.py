@@ -2,6 +2,8 @@
 import json
 import unittest
 from unittest.mock import AsyncMock, patch
+import httpx
+from openai import RateLimitError
 
 from starlette.testclient import TestClient
 from web import app, CompareInput
@@ -71,6 +73,28 @@ class WebTests(unittest.TestCase):
             for key in ("key-one", "key-two"):
                 self.client.post("/api/compare", json={**PAYLOAD, "api_key":key})
             self.assertEqual([call.args[-1] for call in run.await_args_list], ["key-one", "key-two"])
+
+    def test_quota_and_rate_limit_are_distinguished(self):
+        cases = [
+            ({"code":"insufficient_quota", "type":"insufficient_quota"}, "可用额度不足"),
+            ({"error":{"code":"billing_hard_limit_reached"}}, "可用额度不足"),
+            ({"code":"credit_balance_exhausted", "type":"insufficient_quota"}, "预付余额已耗尽"),
+            ({"code":"organization_spend_limit_exceeded"}, "组织 API 消费上限"),
+            ({"code":"project_spend_limit_exceeded"}, "当前项目 API 消费上限"),
+            ({"code":"organization_usage_limit_exceeded"}, "组织 API 用量上限"),
+            ({"code":"rate_limit_exceeded"}, "触发 API 速率限制"),
+            ({"code":"slow_down", "type":"rate_limit_error"}, "触发 API 速率限制"),
+            ({"message":"unknown"}, "无法确定"),
+        ]
+        for body, expected in cases:
+            exc = RateLimitError("secret-test-key-not-real", body=body,
+                response=httpx.Response(429, request=httpx.Request("POST", "https://api.openai.com/v1/responses")))
+            with self.subTest(body=body), patch("web.compare", new_callable=AsyncMock,
+                    side_effect=ExceptionGroup("MCP lifecycle", [exc])):
+                response = self.client.post("/api/compare", json=PAYLOAD)
+                self.assertEqual(response.status_code, 429)
+                self.assertIn(expected, response.json()["error"])
+                self.assertNotIn("test-key-not-real", response.text)
 
 
 class ComparisonTests(unittest.IsolatedAsyncioTestCase):

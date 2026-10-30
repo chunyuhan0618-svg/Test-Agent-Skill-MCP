@@ -32,7 +32,32 @@ def error_message(exc: Exception) -> tuple[int, str]:
     if status in (401, 403):
         return 401, "API Key 无效或没有模型访问权限，请检查后重试。"
     if status == 429:
-        return 429, "API 额度不足或请求过于频繁，请稍后重试。"
+        # 429 同时用于余额/额度问题和速率限制；不能一律建议稍后重试。
+        body = getattr(exc, "body", None)
+        detail = body.get("error", body) if isinstance(body, dict) else {}
+        if not isinstance(detail, dict):
+            detail = {}
+        codes = [getattr(exc, "code", None), getattr(exc, "type", None),
+                 detail.get("code"), detail.get("type")]
+        specific = {
+            "credit_balance_exhausted": "API 预付余额已耗尽（credit_balance_exhausted）。请在 API 平台 Billing 检查并补充可用余额；重复请求不会恢复余额。",
+            "organization_spend_limit_exceeded": "组织 API 消费上限已达到（organization_spend_limit_exceeded）。请联系组织管理员核对消费限制。",
+            "project_spend_limit_exceeded": "当前项目 API 消费上限已达到（project_spend_limit_exceeded）。请在项目设置中核对消费限制。",
+            "organization_usage_limit_exceeded": "组织 API 用量上限已达到（organization_usage_limit_exceeded）。请在 Limits 核对额度，必要时申请提高限制。",
+        }
+        for code in codes:
+            if isinstance(code, str) and code in specific:
+                return 429, specific[code]
+        if any(code in ("insufficient_quota", "billing_hard_limit_reached") for code in codes):
+            return 429, ("API 可用额度不足（insufficient_quota / billing limit）。"
+                         "请在 OpenAI API 平台检查 Billing、余额、组织/项目及用量限制。"
+                         "单纯等待或重复点击通常无法解决；创建 API Key 不代表已有可用额度。")
+        if any(code in ("rate_limit_exceeded", "slow_down", "rate_limit_error") for code in codes):
+            return 429, ("触发 API 速率限制（rate_limit_exceeded / slow_down）。"
+                         "请稍后重试，先只勾选一组、缩短原文，并在 API 平台 Limits 查看限制。")
+        return 429, ("OpenAI 返回 HTTP 429，但未提供可识别的错误代码。"
+                     "请先检查 API 平台 Billing 和 Limits；若有可用额度，"
+                     "稍后仅勾选一组重试。当前信息无法确定是额度不足还是速率限制。")
     if status in (400, 404):
         return 400, "模型不存在、不可用，或不支持当前工具调用及结构化输出。"
     if isinstance(exc, TimeoutError):
