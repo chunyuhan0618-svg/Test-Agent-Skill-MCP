@@ -1,17 +1,33 @@
-# 言间 · 中日英翻译 Agent：网页版 V2 + Skills + MCP
+# 言间 · 中日英翻译 Agent：网页版 V3 + Skills + MCP
 
 ## 版本信息
 
-当前功能版本为 **v2.1.0（免费翻译版）**。完整历史见 [CHANGELOG.md](CHANGELOG.md)。以下版本号记录开发阶段及对应代码提交，不代表已发布同名 Git 标签或 GitHub Release。
+当前功能版本为 **v3.0.0（流程调试版）**。完整历史见 [CHANGELOG.md](CHANGELOG.md)。以下版本号记录开发阶段及对应代码提交，不代表已发布同名 Git 标签或 GitHub Release。
 
 | 版本 | 名称 | 主要变化 | 验证结果 | 对应代码提交 |
 |---|---|---|---|---|
+| v3.0.0 | 流程调试版 | 可选右侧流程图、真实下一步、Agent/Skill/MCP 标识及代码行 | 39 项测试通过 | [67d14da](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/67d14dac1c8401b131b23b79f59e02568d9189a7) |
 | v2.1.0 | 免费翻译版 | 模型与 API Key 改为选填，默认免费翻译 | 28 项测试通过 | [f858aa9](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/f858aa9bbd1461b33fbe8347bb97337b68ac9a4d) |
 | v2.0.1 | 错误提示修正版 | 区分余额、消费/用量上限与请求限速 | 10 项网页相关测试通过 | [aa0b05d](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/aa0b05df0c233fa18c44f9543c3801706dad681a) |
 | v2.0.0 | 网页版 | 三栏对照、组合勾选、模型选择与 Key 输入 | 20 项测试通过 | [dab1e10](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/dab1e10c020f77103a67226f37515a18886d2da3) |
 | v1.0.0 | 命令行版 | 一个 Agent、三个双向 Skill、真实 MCP 术语查询 | 11 项测试通过 | [2fc5751](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/2fc5751ea45c93ee2fa294e4d0d645b572f06f07) |
 
-## V2 网页版快速开始
+## V3 流程调试快速开始
+
+第三版新增可选的 **显示流程图 · 单步调试**。默认关闭，普通翻译不受影响。
+
+1. 按下方命令更新并运行 `web.py`，刷新浏览器页面。
+2. 勾选“显示流程图 · 单步调试”，选择需要的翻译组合后开始。
+3. 右侧按真实执行顺序显示 **Agent / Skill / MCP / Engine** 节点。
+4. 程序在关键步骤前暂停，点击 **下一步** 才继续；代码区显示真实文件名、行号并高亮下一条操作。
+5. Skill 节点可以查看指令原文；点击历史节点可以回看代码。
+6. 点击“结束调试”或取消流程选项可停止后续步骤。免费模式仍无需模型和 Key。
+
+这是关键步骤单步执行器，不是逐条 Python 语句的完整调试器。免费模式中的 Agent 表示程序编排，不表示大模型推理。调试时逐组执行，普通模式仍并行处理选中组合。
+
+完整架构、接口和验证说明见 **[V3 流程调试说明](docs/web-v3.md)**。本次 39 项测试通过，已在浏览器验证免费翻译、真实 MCP、暂停/放行、取消恢复及代码展示；线上大模型路径使用真实 SDK 配合本地响应替身验证。
+
+## 网页版安装与启动
 
 第二版已提供本地独立运行的网页：**左侧中日对照、中间中英对照、右侧日英对照**。三组默认勾选，可取消任意组合；只会为选中的组合调用 Agent、Skill 和 MCP。
 

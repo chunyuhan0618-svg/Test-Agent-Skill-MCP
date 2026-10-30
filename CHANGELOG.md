@@ -1,15 +1,30 @@
 # 版本记录
 
-本项目采用以下版本号记录已确认的开发阶段。所有阶段日期均为 **2026-10-30（日本时间）**。当前功能版本：**v2.1.0**。
+本项目采用以下版本号记录已确认的开发阶段。所有阶段日期均为 **2026-10-30（日本时间）**。当前功能版本：**v3.0.0**。
 
 表中的链接指向各阶段完成时的不可变代码提交。本文件是版本说明，不代表已创建同名 Git 标签或正式 GitHub Release；文档维护提交也不会改变上述功能版本对应的代码提交。
 
 | 版本 | 名称 | 主要变化 | 验证结果 | 对应代码提交 |
 |---|---|---|---|---|
+| v3.0.0 | 流程调试版 | 可选右侧流程图、真实下一步、Agent/Skill/MCP 标识及代码行 | 39 项测试通过 | [67d14da](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/67d14dac1c8401b131b23b79f59e02568d9189a7) |
 | v2.1.0 | 免费翻译版 | 模型与 API Key 改为选填，默认免费翻译 | 28 项测试通过 | [f858aa9](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/f858aa9bbd1461b33fbe8347bb97337b68ac9a4d) |
 | v2.0.1 | 错误提示修正版 | 区分余额、消费/用量上限与请求限速 | 10 项网页相关测试通过 | [aa0b05d](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/aa0b05df0c233fa18c44f9543c3801706dad681a) |
 | v2.0.0 | 网页版 | 三栏对照、组合勾选、模型选择与 Key 输入 | 20 项测试通过 | [dab1e10](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/dab1e10c020f77103a67226f37515a18886d2da3) |
 | v1.0.0 | 命令行版 | 一个 Agent、三个双向 Skill、真实 MCP 术语查询 | 11 项测试通过 | [2fc5751](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/2fc5751ea45c93ee2fa294e4d0d645b572f06f07) |
+
+## v3.0.0 — 流程调试版
+
+日期：2026-10-30。对应提交：[67d14da](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/67d14dac1c8401b131b23b79f59e02568d9189a7)。
+
+- 增加可选的右侧程序流程图，默认不显示；窄屏自动调整布局。
+- 按真实执行现场标记 Agent 编排、Skill 读取、MCP 通信及免费翻译 Engine。
+- 实现后端异步检查点：在关键操作前暂停，点击下一步只放行当前步骤，重复序号不能越步。
+- 显示真实源文件、行号和附近代码，高亮下一条操作；可查看 Skill 原文及历史步骤。
+- 免费与大模型两条执行路径均接入调试，保留不填模型/Key 的免费翻译和原有 CLI。
+- 增加取消、暂停超时、会话容量回收、服务退出清理及密钥脱敏。
+- 验证：39 项测试通过；浏览器完成真实免费翻译与 MCP 的九步流程，并验证隐藏/取消后恢复普通翻译。大模型路径以真实 SDK、本地 HTTP 替身与真实 MCP 验证，未消耗线上模型 API。
+
+范围：这是关键步骤单步执行，不逐行暂停 SDK 或 MCP Server 子进程内部语句，不展示隐藏推理。单次暂停最多 5 分钟，整次调试最多 20 分钟。详细说明见 [V3 流程调试教程](docs/web-v3.md)。
 
 ## v2.1.0 — 免费翻译版
 
