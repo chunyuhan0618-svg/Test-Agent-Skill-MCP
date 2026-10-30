@@ -25,6 +25,13 @@ async def fixture_compare(text, source, pair, model, api_key):
 
 
 web.compare = fixture_compare
+
+
+async def fixture_free(text, source, pair):
+    return await fixture_compare(text, source, pair, "", "")
+
+
+web.compare_free = fixture_free
 app = web.app
 
 if __name__ == "__main__":

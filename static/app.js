@@ -20,7 +20,7 @@ function render(result) {
   for(const [title,text] of [['意思解释',result.explanation],['关键词与用法',result.keywords],['术语参考',result.references]]) {
     const h=document.createElement('h3');h.textContent=title;const p=document.createElement('p');p.textContent=text;explanation.append(h,p);
   }
-  const note=document.createElement('div');note.className='skill-note';note.textContent=`Skill / ${result.skill} · MCP 术语查询`;body.append(explanation,note);
+  const note=document.createElement('div');note.className='skill-note';note.textContent=result.mode==='free'?`${result.engine} · 组合 ${result.skill} · MCP 本地术语`:`Skill / ${result.skill} · MCP 术语查询`;body.append(explanation,note);
 }
 function updateSelection() {
   const enabled=selected();
@@ -32,7 +32,9 @@ function updateSelection() {
   $('#status').textContent=enabled.length?`已选择 ${enabled.length} 组对照，等待输入。`:'请至少选择一组对照。';
 }
 document.querySelectorAll('.choices input').forEach(x=>x.addEventListener('change',updateSelection));
-$('#model').addEventListener('change',()=>{const custom=$('#model').value==='custom';$('#custom-wrap').hidden=!custom;$('#custom-model').required=custom;});
+function updateMode(){const ai=Boolean($('#model').value&&$('#api-key').value.trim());$('#mode-hint').textContent=ai?'大模型模式：使用所选模型与 API Key，原文发送至 OpenAI，可能产生 API 费用。取消勾选的组合不翻译。':'免费模式：无需模型和 Key，原文将发送至 MyMemory 翻译服务，需联网，有每日额度；每次最多 1000 字符。解释使用本地术语资料。取消勾选的组合不翻译。';}
+$('#model').addEventListener('change',()=>{const custom=$('#model').value==='custom';$('#custom-wrap').hidden=!custom;updateMode();});
+$('#api-key').addEventListener('input',updateMode);
 $('#text').addEventListener('input',()=>{$('#count').textContent=`${$('#text').value.length.toLocaleString()} / 10,000`;});
 $('#sample').addEventListener('click',()=>{$('#source').value='ja';$('#text').value='お疲れ様です。ご確認をお願いいたします。';$('#text').dispatchEvent(new Event('input'));});
 $('#toggle-key').addEventListener('click',()=>{const show=$('#api-key').type==='password';$('#api-key').type=show?'text':'password';$('#toggle-key').textContent=show?'隐藏':'显示';$('#toggle-key').setAttribute('aria-label',show?'隐藏 API Key':'显示 API Key');$('#toggle-key').setAttribute('aria-pressed',String(show));});
@@ -40,7 +42,9 @@ $('#form').addEventListener('submit',async(event)=>{
   event.preventDefault();if(busy)return;
   const enabled=selected(),text=$('#text').value,api_key=$('#api-key').value.trim();
   const model=($('#model').value==='custom'?$('#custom-model').value:$('#model').value).trim();
-  if(!enabled.length||!text.trim()||!api_key||!model){$('#status').textContent='请填写原文、模型和 API Key，并选择至少一组对照。';return;}
+  if(!enabled.length||!text.trim()){$('#status').textContent='请填写原文，并选择至少一组对照。';return;}
+  if($('#model').value==='custom'&&!model&&api_key){$('#status').textContent='请填写自定义模型 ID，或选择“不指定模型”使用免费翻译。';return;}
+  if((!model||!api_key)&&text.length>1000){$('#status').textContent='免费模式每次最多 1000 字符，请缩短原文。';return;}
   busy=true;const source=$('#source').value;
   // 固定本轮快照并锁定编辑，避免旧结果对应到新设置。
   document.querySelectorAll('form input,form textarea,form select,form button').forEach(x=>x.disabled=true);

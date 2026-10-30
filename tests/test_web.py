@@ -39,7 +39,7 @@ class WebTests(unittest.TestCase):
 
     def test_invalid_inputs_do_not_call_agent_or_echo_key(self):
         cases = [{"source":"fr"}, {"pair":"unknown"}, {"text":" "},
-                 {"text":"x"*10001}, {"api_key":""}, {"model":""},
+                 {"text":"x"*10001},
                  {"api_key":123}, {"pairs":["zh-ja"]}]
         with patch("web.compare", new_callable=AsyncMock) as run:
             for changes in cases:
@@ -50,6 +50,19 @@ class WebTests(unittest.TestCase):
 
     def test_key_redacted_from_repr(self):
         self.assertNotIn("test-key-not-real", repr(CompareInput(**PAYLOAD)))
+
+    def test_model_and_key_optional_use_free_mode(self):
+        cases = [{}, {"model":"gpt-4.1-mini"}, {"api_key":"unused-key"},
+                 {"model":"", "api_key":""}]
+        for optional in cases:
+            with self.subTest(optional=optional), patch("web.compare_free", new_callable=AsyncMock,
+                    return_value={"mode":"free", **RESULT}) as free, patch("web.compare", new_callable=AsyncMock) as ai:
+                response = self.client.post("/api/compare", json={
+                    "text":"你好", "source":"zh", "pair":"zh-ja", **optional})
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.json()["mode"], "free")
+                free.assert_awaited_once_with("你好", "zh", "zh-ja")
+                ai.assert_not_awaited()
 
     def test_cross_origin_and_wrong_content_type(self):
         with patch("web.compare", new_callable=AsyncMock) as run:

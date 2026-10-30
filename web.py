@@ -12,6 +12,7 @@ from starlette.routing import Route, Mount
 from starlette.staticfiles import StaticFiles
 
 from comparison import compare
+from free_translation import compare_free, FreeTranslationError
 from skill_router import ROOT
 
 
@@ -20,14 +21,16 @@ class CompareInput(BaseModel):
     text: str = Field(min_length=1, max_length=10000)
     source: Literal["zh", "ja", "en"]
     pair: Literal["zh-ja", "zh-en", "en-ja"]
-    model: str = Field(min_length=1, max_length=120, pattern=r"^[a-zA-Z0-9._:/-]+$")
-    api_key: SecretStr = Field(min_length=1, max_length=512)
+    model: str = Field(default="", max_length=120, pattern=r"^[a-zA-Z0-9._:/-]*$")
+    api_key: SecretStr = Field(default=SecretStr(""), max_length=512)
 
 
 def error_message(exc: Exception) -> tuple[int, str]:
     # AnyIO 可能将 SDK 错误包在 ExceptionGroup 中；从不回显请求或密钥。
     if isinstance(exc, BaseExceptionGroup):
         return error_message(exc.exceptions[0])
+    if isinstance(exc, FreeTranslationError):
+        return 503, str(exc)
     status = getattr(exc, "status_code", None)
     if status in (401, 403):
         return 401, "API Key 无效或没有模型访问权限，请检查后重试。"
@@ -83,16 +86,18 @@ async def compare_endpoint(request: Request):
             return JSONResponse({"error": "请求内容过大。"}, status_code=413)
     try:
         data = CompareInput.model_validate_json(body)
-        if not data.text.strip() or not data.api_key.get_secret_value().strip():
+        if not data.text.strip():
             raise ValueError("empty input")
     except (ValidationError, ValueError):
         return JSONResponse({"error": "请检查原文、语言、模型与 API Key；原文限 10000 字符。"}, status_code=422)
     try:
         # 每个请求独立持有 key/client/session，不修改环境变量或共享凭据。
-        result = await asyncio.wait_for(compare(
-            data.text, data.source, data.pair, data.model,
-            data.api_key.get_secret_value().strip(),
-        ), timeout=180)
+        key = data.api_key.get_secret_value().strip()
+        if data.model and key:
+            operation = compare(data.text, data.source, data.pair, data.model, key)
+        else:
+            operation = compare_free(data.text, data.source, data.pair)
+        result = await asyncio.wait_for(operation, timeout=180)
         return JSONResponse(result)
     except Exception as exc:
         status, message = error_message(exc)
