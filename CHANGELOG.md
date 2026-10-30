@@ -1,16 +1,30 @@
 # 版本记录
 
-本项目采用以下版本号记录已确认的开发阶段。所有阶段日期均为 **2026-10-30（日本时间）**。当前功能版本：**v3.0.0**。
+本项目采用以下版本号记录已确认的开发阶段。所有阶段日期均为 **2026-10-30（日本时间）**。当前功能版本：**v3.1.0**。
 
 表中的链接指向各阶段完成时的不可变代码提交。本文件是版本说明，不代表已创建同名 Git 标签或正式 GitHub Release；文档维护提交也不会改变上述功能版本对应的代码提交。
 
 | 版本 | 名称 | 主要变化 | 验证结果 | 对应代码提交 |
 |---|---|---|---|---|
+| v3.1.0 | 可调宽流程调试版 | 半屏可拖拽流程面板、底部固定按钮、一步到底 | 41 项测试通过 | [0be2caa](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/0be2caa4645569198384957c3f63b6d8addad6f8) |
 | v3.0.0 | 流程调试版 | 可选右侧流程图、真实下一步、Agent/Skill/MCP 标识及代码行 | 39 项测试通过 | [67d14da](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/67d14dac1c8401b131b23b79f59e02568d9189a7) |
 | v2.1.0 | 免费翻译版 | 模型与 API Key 改为选填，默认免费翻译 | 28 项测试通过 | [f858aa9](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/f858aa9bbd1461b33fbe8347bb97337b68ac9a4d) |
 | v2.0.1 | 错误提示修正版 | 区分余额、消费/用量上限与请求限速 | 10 项网页相关测试通过 | [aa0b05d](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/aa0b05df0c233fa18c44f9543c3801706dad681a) |
 | v2.0.0 | 网页版 | 三栏对照、组合勾选、模型选择与 Key 输入 | 20 项测试通过 | [dab1e10](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/dab1e10c020f77103a67226f37515a18886d2da3) |
 | v1.0.0 | 命令行版 | 一个 Agent、三个双向 Skill、真实 MCP 术语查询 | 11 项测试通过 | [2fc5751](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/2fc5751ea45c93ee2fa294e4d0d645b572f06f07) |
+
+## v3.1.0 — 可调宽流程调试版
+
+日期：2026-10-30。对应提交：[0be2caa](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/0be2caa4645569198384957c3f63b6d8addad6f8)。
+
+- 将右侧流程面板默认宽度扩大至约半屏，增加可拖拽分隔条、键盘调整和窄栏自适应。
+- 将下一步、结束调试放入面板底部固定控制栏；上方流程、代码及 Skill 内容独立滚动。
+- 在结束调试左侧增加一步到底，后端放行当前及后续检查点，自动完成本次已勾选组合，继续记录真实流程。
+- 一步到底运行期间仍可结束调试；不会重复执行正在运行的请求。
+- 页面版本更新为 v3.1.0，保留免费模式、模型/Key 选填与原有单步操作。
+- 验证：41 项测试通过；浏览器验证半屏布局、拖拽至约 61%、键盘调整至 70%、手机布局、长内容下底部按钮可见，以及一次点击完成三组真实免费翻译并保留 27 个流程节点。未消耗线上大模型 API。
+
+更新步骤与接口说明见 [v3.1.0 使用说明](docs/web-v3.1.md)。本版没有新增 Python 依赖。
 
 ## v3.0.0 — 流程调试版
 
