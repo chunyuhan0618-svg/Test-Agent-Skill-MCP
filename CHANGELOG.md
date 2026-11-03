@@ -6,7 +6,7 @@
 
 | 版本 | 名称 | 主要变化 | 验证结果 | 对应代码提交 |
 |---|---|---|---|---|
-| v3.2.0 | 流程学习入口版 | 更新学习主题标题、移除介绍区、默认开启流程调试 | 41 项测试通过 | [v3.2.0 说明](docs/web-v3.2.md) |
+| v3.2.0 | 流程学习入口版 | 更新学习主题标题、移除介绍区、默认开启流程调试 | 41 项测试通过 | [5e1d785](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/5e1d785e607820f4c665345478d85bbec1ac6e0e) |
 | v3.1.0 | 可调宽流程调试版 | 半屏可拖拽流程面板、底部固定按钮、一步到底 | 41 项测试通过 | [0be2caa](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/0be2caa4645569198384957c3f63b6d8addad6f8) |
 | v3.0.0 | 流程调试版 | 可选右侧流程图、真实下一步、Agent/Skill/MCP 标识及代码行 | 39 项测试通过 | [67d14da](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/67d14dac1c8401b131b23b79f59e02568d9189a7) |
 | v2.1.0 | 免费翻译版 | 模型与 API Key 改为选填，默认免费翻译 | 28 项测试通过 | [f858aa9](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/f858aa9bbd1461b33fbe8347bb97337b68ac9a4d) |
@@ -16,7 +16,7 @@
 
 ## v3.2.0 — 流程学习入口版
 
-日期：2026-11-03。提交分支：`current-draft`。
+日期：2026-11-03。提交分支：`current-draft`。对应提交：[5e1d785](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/5e1d785e607820f4c665345478d85bbec1ac6e0e)。
 
 - 将页首品牌区域替换为“通过一个翻译产品来理解 Agent，SKILL，MCP的流程。”，并更新浏览器标题。
 - 移除宣传标语、主标题和介绍段落，清理其专用样式及移动端规则。
