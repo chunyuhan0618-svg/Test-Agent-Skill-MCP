@@ -1,4 +1,7 @@
-"""真正的 MCP Server：从 JSON 查询资料，以 stdio 对外提供工具。"""
+"""English: Expose a real FastMCP lookup_term tool backed by the local JSON glossary. Standard output is reserved for protocol traffic.
+日本語：ローカル JSON 用語集を使う実際の FastMCP lookup_term を公開します。標準出力はプロトコル通信専用です。
+中文：以本地 JSON 术语表提供真实 FastMCP lookup_term 工具；标准输出专用于协议通信。
+"""
 import json
 import unicodedata
 from typing import Literal

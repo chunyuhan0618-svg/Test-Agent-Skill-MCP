@@ -1,3 +1,7 @@
+"""English: Test free-provider parsing, UTF-8 segmentation, quota handling and local MCP notes with network responses mocked.
+日本語：通信応答を模擬し、無料サービスの応答解析・UTF-8 分割・利用枠エラー・MCP 用語情報を検証します。
+中文：模拟网络响应，测试免费服务解析、UTF-8 分段、额度处理和本地 MCP 资料。
+"""
 import unittest
 from unittest.mock import patch
 

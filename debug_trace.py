@@ -1,4 +1,7 @@
-"""真实异步检查点。无调试上下文时直接返回，不改变普通调用方式。"""
+"""English: Manage real asynchronous checkpoints, source locations, session lifetime and cancellation. Snapshots never capture local variables or credentials.
+日本語：実際の非同期停止点、ソース位置、セッション期限とキャンセルを管理します。ローカル変数や認証情報は記録しません。
+中文：管理真实异步检查点、源码位置、会话期限和取消；快照不读取局部变量或凭据。
+"""
 import asyncio
 import inspect
 import secrets

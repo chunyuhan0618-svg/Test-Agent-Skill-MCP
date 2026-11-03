@@ -1,4 +1,7 @@
-"""确定性选择语言组合；Skill 是指令文件，不是 Python 可执行函数。"""
+"""English: Map six translation directions to three bilingual Skill files. Resolve paths from source location, and combine shared and pair-specific instructions.
+日本語：6方向の翻訳を3つの対訳 Skill に対応させます。ソース位置からパスを求め、共通規則と組専用の指示を結合します。
+中文：将六个翻译方向映射到三个双向 Skill；从源文件位置推导路径，组合共享规则和专用指令。
+"""
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent

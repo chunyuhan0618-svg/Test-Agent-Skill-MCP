@@ -1,46 +1,45 @@
 <!doctype html>
-<html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>言间 · 中日英对照工作台</title><link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="/static/debug.css"><script src="/static/debug.js" defer></script><script src="/static/app.js" defer></script></head>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Understand Agent, Skill and MCP</title><link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="/static/debug.css"><script src="/static/i18n.js" defer></script><script src="/static/debug.js" defer></script><script src="/static/app.js" defer></script></head>
 <body>
 <main>
-  <header><a class="brand" href="/">言间<span>LINGUA WORKSPACE</span></a><span class="version">v3.1.0 · 流程调试</span></header>
-  <section class="intro"><p class="eyebrow">WORDS, WITH CONTEXT.</p><h1>跨越语言，读懂意思。</h1><p>一份原文，三组对照。让译文、语气与用法，在同一画面里清晰展开。</p></section>
-  <div class="debug-toolbar"><label><input id="debug-toggle" type="checkbox"> 显示流程图 · 单步调试</label><span>勾选后，点击“下一步”才执行当前步骤。</span></div>
-  <div id="workspace" class="workspace"><div class="translation-space">
+  <header><h1 class="page-title">Understand Agent, Skill and MCP through a translation app.</h1><span class="version">v3.5.0 · Execution debugger</span><label class="ui-language" for="ui-language"><span>Interface language</span><select id="ui-language"><option value="en" selected>English</option><option value="zh">Chinese</option><option value="ja">Japanese</option></select></label></header>
+  <div class="debug-toolbar"><label><input id="debug-toggle" type="checkbox" checked> Show workflow · Step debugging</label><span>Enabled by default. Click Next after starting, or uncheck to translate directly.</span></div>
+  <div id="workspace" class="workspace debug-enabled"><div class="translation-space">
   <form id="form">
-    <section class="settings panel" aria-label="模型设置">
-      <div><label for="model">大语言模型 <span>选填</span></label><select id="model"><option value="">不指定模型 · 免费翻译</option><option value="gpt-4.1-mini">GPT-4.1 mini</option><option value="gpt-4.1">GPT-4.1</option><option value="gpt-4o-mini">GPT-4o mini</option><option value="custom">自定义模型 ID…</option></select></div>
-      <div id="custom-wrap" hidden><label for="custom-model">自定义模型 ID</label><input id="custom-model" placeholder="输入账号可用的模型 ID" maxlength="120"></div>
-      <div class="key-field"><label for="api-key">API Key <span>选填 · 仅本次使用</span></label><div class="key-input"><input id="api-key" type="password" placeholder="留空也可翻译；使用大模型时填写" autocomplete="off" maxlength="512"><button id="toggle-key" type="button" aria-label="显示 API Key" aria-pressed="false">显示</button></div></div>
+    <section class="settings panel" aria-label="Model settings">
+      <div><label for="model">Language model<span>Optional</span></label><select id="model"><option value="">No model · Free translation</option><option value="gpt-4.1-mini">GPT-4.1 mini</option><option value="gpt-4.1">GPT-4.1</option><option value="gpt-4o-mini">GPT-4o mini</option><option value="custom">Custom model ID…</option></select></div>
+      <div id="custom-wrap" hidden><label for="custom-model">Custom model ID</label><input id="custom-model" placeholder="Enter a model ID available to your account" maxlength="120"></div>
+      <div class="key-field"><label for="api-key">API Key <span>Optional · This session only</span></label><div class="key-input"><input id="api-key" type="password" placeholder="Leave blank for free translation; required for LLM mode" autocomplete="off" maxlength="512"><button id="toggle-key" type="button" aria-label="Show API key" aria-pressed="false">Show</button></div></div>
     </section>
     <section class="composer panel">
-      <div class="composer-head"><label for="text">待翻译原文</label><label class="source-label" for="source">原文语言 <select id="source"><option value="zh">中文</option><option value="ja">日本語</option><option value="en">English</option></select></label></div>
-      <textarea id="text" maxlength="10000" required placeholder="在这里输入一句话、一封邮件，或一段想读懂的内容…"></textarea>
-      <div class="composer-foot"><button type="button" id="sample">试试示例 ↗</button><span id="count">0 / 10,000</span></div>
+      <div class="composer-head"><label for="text">Source text</label><label class="source-label" for="source">Source language<select id="source"><option value="zh">Chinese</option><option value="ja">Japanese</option><option value="en">English</option></select></label></div>
+      <textarea id="text" maxlength="10000" required placeholder="Enter a sentence, an email, or a passage you want to understand…"></textarea>
+      <div class="composer-foot"><button type="button" id="sample">Try an example ↗</button><span id="count">0 / 10,000</span></div>
     </section>
-    <div class="action-bar"><div><p>选择对照组合</p><div class="choices"><label><input type="checkbox" value="zh-ja" checked> 中日对照</label><label><input type="checkbox" value="zh-en" checked> 中英对照</label><label><input type="checkbox" value="en-ja" checked> 日英对照</label></div></div><button class="primary" id="submit" type="submit">开始对照翻译 <span>→</span></button></div>
-    <p class="hint" id="mode-hint">免费模式：无需模型和 Key，原文将发送至 MyMemory 翻译服务，需联网，有每日额度；每次最多 1000 字符。解释使用本地术语资料。取消勾选的组合不翻译。</p>
+    <div class="action-bar"><div><p>Choose language pairs</p><div class="choices"><label><input type="checkbox" value="zh-ja" checked> Chinese–Japanese</label><label><input type="checkbox" value="zh-en" checked> Chinese–English</label><label><input type="checkbox" value="en-ja" checked> Japanese–English</label></div></div><button class="primary" id="submit" type="submit">Translate selected pairs<span>→</span></button></div>
+    <p class="hint" id="mode-hint">Free mode: no model or key required. Source text is sent to MyMemory. Internet access and daily quota apply; up to 1,000 characters per request. Notes use the local glossary. Unchecked pairs are skipped.</p>
   </form>
-  <p id="status" role="status" aria-live="polite">已选择 3 组对照，等待输入。</p>
-  <section class="results" aria-label="翻译对照结果">
-    <article class="result panel" data-pair="zh-ja"><div class="result-head"><div><span class="pair-index">01 / ZH · JA</span><h2>中日对照</h2></div><span class="badge">待翻译</span></div><div class="result-body"><div class="empty"><span>中 / 日</span><p>中文与日文，准确表达每一层意思。</p></div></div></article>
-    <article class="result panel" data-pair="zh-en"><div class="result-head"><div><span class="pair-index">02 / ZH · EN</span><h2>中英对照</h2></div><span class="badge">待翻译</span></div><div class="result-body"><div class="empty"><span>中 / EN</span><p>从字面到语境，找到自然的表达。</p></div></div></article>
-    <article class="result panel" data-pair="en-ja"><div class="result-head"><div><span class="pair-index">03 / JA · EN</span><h2>日英对照</h2></div><span class="badge">待翻译</span></div><div class="result-body"><div class="empty"><span>日 / EN</span><p>看懂语序、敬语与微妙的语气。</p></div></div></article>
+  <p id="status" role="status" aria-live="polite">3 pairs selected. Ready for input.</p>
+  <section class="results" aria-label="Translation results">
+    <article class="result panel" data-pair="zh-ja"><div class="result-head"><div><span class="pair-index">01 / ZH · JA</span><h2>Chinese–Japanese</h2></div><span class="badge">Ready</span></div><div class="result-body"><div class="empty"><span>ZH / JA</span><p>Explore meaning in Chinese and Japanese.</p></div></div></article>
+    <article class="result panel" data-pair="zh-en"><div class="result-head"><div><span class="pair-index">02 / ZH · EN</span><h2>Chinese–English</h2></div><span class="badge">Ready</span></div><div class="result-body"><div class="empty"><span>ZH / EN</span><p>Find natural expressions in context.</p></div></div></article>
+    <article class="result panel" data-pair="en-ja"><div class="result-head"><div><span class="pair-index">03 / JA · EN</span><h2>Japanese–English</h2></div><span class="badge">Ready</span></div><div class="result-body"><div class="empty"><span>JA / EN</span><p>Understand word order, politeness and tone.</p></div></div></article>
   </section>
   </div>
-  <div id="debug-resizer" class="debug-resizer" role="separator" aria-label="调整流程图宽度" aria-orientation="vertical" aria-valuemin="30" aria-valuemax="70" aria-valuenow="50" tabindex="0" hidden><span></span></div>
-  <aside id="debug-panel" class="debug-panel panel" hidden aria-label="程序执行流程">
+  <div id="debug-resizer" class="debug-resizer" role="separator" aria-label="Resize workflow panel" aria-orientation="vertical" aria-valuemin="30" aria-valuemax="70" aria-valuenow="50" tabindex="0"><span></span></div>
+  <aside id="debug-panel" class="debug-panel panel" aria-label="Program execution workflow">
     <div class="debug-scroll" id="debug-scroll">
-    <div class="debug-heading"><div><p class="eyebrow">LIVE EXECUTION</p><h2>看见程序如何工作</h2></div><span class="badge">DEBUG</span></div>
-    <p class="debug-intro">Agent 负责推进，Skill 提供规则，MCP 连接工具。免费模式由程序编排，不会调用大模型。</p>
+    <div class="debug-heading"><div><p class="eyebrow">LIVE EXECUTION</p><h2>See how the program works</h2></div><span class="badge">DEBUG</span></div>
+    <p class="debug-intro">Agent orchestrates, Skills supply rules, and MCP connects tools. Free mode uses program orchestration without an LLM.</p>
     <div class="debug-legend"><span>Agent</span><span>Skill</span><span>MCP</span><span>Engine</span></div>
-    <p id="debug-state" role="status" aria-live="polite">准备就绪。开始翻译后，将停在第一步。</p>
-    <ol id="flow-list" class="flow-list" aria-label="实际执行步骤"><li class="flow-placeholder">开始翻译 → Agent 选择组合 → Skill → 翻译引擎 → MCP → Agent 交付结果</li></ol>
-    <section class="code-view" aria-label="当前步骤代码"><h3 id="code-location">等待执行位置</h3><p id="code-detail">每次暂停会显示真实源文件及下一段代码的起始行。点击流程节点可查看已执行步骤。</p><pre id="debug-code"># 勾选需要的组合，然后开始翻译。</pre><details id="skill-resource" hidden><summary>查看本步 Skill 原文</summary><pre id="skill-source"></pre></details></section>
-    <p class="debug-footnote">关键步骤断点，不是逐条 Python 语句调试；未点击前不会执行该步骤。暂停 5 分钟自动结束。</p>
+    <p id="debug-state" role="status" aria-live="polite">Ready. Translation will pause at the first step.</p>
+    <ol id="flow-list" class="flow-list" aria-label="Actual execution steps"><li class="flow-placeholder">Start → Agent selects pair → Skill → Translation engine → MCP → Agent delivers results</li></ol>
+    <section class="code-view" aria-label="Current step source code"><h3 id="code-location">Waiting for execution location</h3><p id="code-detail">Each pause shows the actual source file and next code location. Click a node to inspect a recorded step.</p><pre id="debug-code"># Select language pairs, then start translating.</pre><details id="skill-resource" hidden><summary>View this step’s Skill source</summary><pre id="skill-source"></pre></details></section>
+    <p class="debug-footnote">Breakpoints pause at key operations, not every Python statement. A step runs only after you advance it. Pauses expire after 5 minutes.</p>
     </div>
-    <div class="debug-controls"><button id="debug-next" type="button" disabled>下一步 →</button><button id="debug-continue" type="button" disabled>一步到底</button><button id="debug-cancel" type="button" disabled>结束调试</button></div>
+    <div class="debug-controls"><button id="debug-next" type="button" disabled>Next →</button><button id="debug-continue" type="button" disabled>Run to end</button><button id="debug-cancel" type="button" disabled>End debugging</button></div>
   </aside></div>
-  <footer><span>言间 · TRANSLATE WITH UNDERSTANDING</span><span>Agent + Skills + MCP</span></footer>
+  <footer><span>TRANSLATE WITH UNDERSTANDING</span><span>Agent + Skills + MCP</span></footer>
 </main>
 </body></html>

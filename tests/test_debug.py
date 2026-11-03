@@ -1,4 +1,7 @@
-"""验证真实执行门控，不依赖线上模型或免费服务。"""
+"""English: Test real checkpoint pausing, next-step sequencing, run-to-end, cancellation and session cleanup, including integration paths.
+日本語：実際の停止、次ステップの順序、最後まで実行、キャンセル、セッション回収と統合経路を検証します。
+中文：测试真实暂停、下一步序号、一步到底、取消、会话回收及集成路径。
+"""
 import asyncio
 import inspect
 import json

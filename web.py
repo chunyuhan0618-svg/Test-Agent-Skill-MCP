@@ -1,4 +1,7 @@
-"""本地独立网页入口：python web.py。只绑定本机，不存储 API Key。"""
+"""English: Start the local web Agent with python web.py. Serve static assets and validated APIs, protect credentials, and manage actual debug tasks. Display language is request-scoped.
+日本語：python web.py でローカル Web Agent を起動します。静的画面と検証済み API を提供し、キーを保護し、実際のデバッグタスクを管理します。表示言語は要求単位です。
+中文：用 python web.py 启动本地网页 Agent，提供静态资源和校验后的 API，保护凭据并管理真实调试任务；界面语言按请求隔离。
+"""
 import asyncio
 from contextlib import asynccontextmanager
 from typing import Literal
@@ -12,6 +15,7 @@ from starlette.responses import FileResponse, JSONResponse
 from starlette.routing import Route, Mount
 from starlette.staticfiles import StaticFiles
 
+from ui_locale import UI_LANGUAGE
 from comparison import compare
 from free_translation import compare_free, FreeTranslationError
 from skill_router import ROOT
@@ -240,7 +244,12 @@ async def response_headers(request, call_next):
             return JSONResponse({"error":"仅接受同源页面请求。"}, status_code=403)
         if request.headers.get("content-type", "").split(";")[0] != "application/json":
             return JSONResponse({"error":"请求必须为 JSON。"},status_code=415)
-    response = await call_next(request)
+    language = request.headers.get("x-ui-language", "zh")
+    token = UI_LANGUAGE.set(language if language in ("en", "ja", "zh") else "en")
+    try:
+        response = await call_next(request)
+    finally:
+        UI_LANGUAGE.reset(token)
     response.headers["Cache-Control"] = "no-store"
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Referrer-Policy"] = "no-referrer"
@@ -257,8 +266,8 @@ app.add_middleware(BaseHTTPMiddleware, dispatch=response_headers)
 if __name__ == "__main__":
     import argparse
     import uvicorn
-    parser = argparse.ArgumentParser(description="中日英对照工作台")
+    parser = argparse.ArgumentParser(description="Trilingual translation Agent")
     parser.add_argument("--port", type=int, default=8000)
     args = parser.parse_args()
-    print(f"打开浏览器：http://127.0.0.1:{args.port}（Ctrl+C 停止）")
+    print(f"Open http://127.0.0.1:{args.port} in your browser. Stop: Ctrl+C")
     uvicorn.run(app, host="127.0.0.1", port=args.port, access_log=False)

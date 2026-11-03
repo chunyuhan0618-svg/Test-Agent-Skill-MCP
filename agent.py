@@ -1,4 +1,7 @@
-"""一个 Agent 加载一个语言 Skill，通过 MCP 获取资料，再生成翻译解释。"""
+"""English: Validate translation requests, load pair rules, and run a bounded model/tool loop. Tool results return through MCP with matching call IDs.
+日本語：翻訳要求を検証し、組の規則を読み込み、回数制限付きのモデル・ツール処理を実行します。MCP の結果は対応する call ID で返します。
+中文：校验翻译请求、加载组合规则，执行有轮数限制的模型与工具循环，并用对应 call ID 回传 MCP 结果。
+"""
 import json
 import sys
 from dataclasses import dataclass

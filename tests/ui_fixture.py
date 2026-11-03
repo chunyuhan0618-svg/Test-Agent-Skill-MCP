@@ -1,4 +1,7 @@
-"""仅供界面验证：python tests/ui_fixture.py。返回显式标注的模拟译文，不调用模型。"""
+"""English: Provide explicitly simulated translation results for repeatable browser checks. This fixture is not proof of live model or provider availability.
+日本語：再現可能なブラウザー確認向けに、明示的な模擬翻訳を返します。実際のモデルやサービスの可用性を示すものではありません。
+中文：为可复现浏览器检查提供明确标注的模拟结果，不能作为线上模型或翻译服务可用的证据。
+"""
 import asyncio
 import sys
 from pathlib import Path

@@ -1,4 +1,7 @@
-"""CLI 入口：python main.py --help。"""
+"""English: Command-line Agent entry point. Use --help for arguments; --demo exercises real Skills/MCP without producing translations. Normal CLI translation requires local model configuration.
+日本語：CLI Agent の入口です。引数は --help で確認できます。--demo は実際の Skill/MCP を確認し、翻訳は生成しません。通常翻訳にはモデル設定が必要です。
+中文：命令行 Agent 入口；--help 查看参数，--demo 验证真实 Skill/MCP 但不生成翻译，正常 CLI 翻译需模型配置。
+"""
 import argparse
 import asyncio
 import os

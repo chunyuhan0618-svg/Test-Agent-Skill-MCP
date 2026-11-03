@@ -26,8 +26,9 @@ function updateSelection() {
   const enabled=selected();
   for(const pair of pairs){card(pair).classList.toggle('disabled',!enabled.includes(pair));
     if(!enabled.includes(pair))message(pair,'本组已关闭，不进行对照翻译。','未启用');
-    else if(card(pair).querySelector('.badge').textContent==='未启用')message(pair,'输入原文后，开始本组对照。','待翻译');
+    else if(card(pair).dataset.disabled==='true')message(pair,'输入原文后，开始本组对照。','待翻译');
   }
+  for(const pair of pairs)card(pair).dataset.disabled=String(!enabled.includes(pair));
   $('#submit').disabled=!enabled.length;
   $('#status').textContent=enabled.length?`已选择 ${enabled.length} 组对照，等待输入。`:'请至少选择一组对照。';
 }
