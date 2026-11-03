@@ -1,5 +1,15 @@
 # 通过翻译产品理解 Agent、Skill、MCP：v3.5.0
 
+## Keywords / 検索キーワード / 搜索关键词
+
+**English:** AI agent tutorial, Agent Skills, SKILL.md, Model Context Protocol (MCP), MCP Python SDK, Python AI agent example, MCP client and server, stdio transport, tool calling, function calling, OpenAI Responses API, trilingual translation app, Chinese Japanese English translation, bilingual comparison, language learning, translation explanation, workflow visualization, step-by-step debugging, internationalization (i18n), local web application, free translation without an API key.
+
+**日本語：** AIエージェント入門、Agent Skills、SKILL.md、Model Context Protocol（MCP）、Python AIエージェント サンプル、MCPクライアント・サーバー、ツール呼び出し、OpenAI Responses API、中国語・日本語・英語翻訳、対訳比較、意味・用法の解説、語学学習、処理フロー可視化、ステップ実行デバッグ、多言語対応、国際化、ローカルWebアプリ、APIキー不要の無料翻訳。
+
+**中文：** AI 智能体教程、Agent 开发入门、Agent Skills 技能、SKILL.md、模型上下文协议 MCP、Python 智能体示例、MCP 客户端与服务器、工具调用、函数调用、OpenAI Responses API、中日英三语翻译、双语对照、翻译与意思解释、语言学习、工作流可视化、单步调试、多语言界面、国际化 i18n、本地网页应用、无需 API Key 的免费翻译。
+
+English: These terms describe implemented learning features. Free translation uses an online service; it is not offline translation, and LLM translation requires a model and key. Japanese / 日本語：実装済みの学習機能に関する用語です。無料翻訳はオンラインサービスを利用し、オフライン翻訳ではありません。LLM 翻訳にはモデルとキーが必要です。中文：关键词对应本项目已实现的教学功能；免费翻译仍需联网，模型翻译需指定模型和密钥。
+
 ## English — Install and run
 
 This educational translation app demonstrates an **Agent** orchestrating three bilingual **Skills** (Chinese–Japanese, Chinese–English, Japanese–English) and a real local **MCP** terminology tool. The interface defaults to **English**; use **Interface language** at the top to switch to Chinese or Japanese. Labels, menus, guidance, errors, workflow steps and local glossary notes switch immediately, without changing your input, translation text or actual source code.

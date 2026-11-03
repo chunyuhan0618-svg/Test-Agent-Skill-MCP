@@ -53,3 +53,13 @@ Before commit / コミット前 / 提交前：`git diff --check`。
 - English: maintain English, Japanese and Chinese entries in `static/locales.json`; verify both initial and dynamically inserted UI text. Do not translate user input, translation paragraphs, actual source code or original Skill source. Model explanations follow the task-start language. Add specific trilingual module guidance to new Python files and trilingual reading guidance to new Markdown files. Also check `node --check static/i18n.js` when modifying localization.
 - 日本語：`static/locales.json` の英語・日本語・中国語を維持し、初期表示と動的表示を確認します。原文・訳文・実際のコード・Skill 原文は表示切替で翻訳しません。モデル説明は開始時の言語を使います。新しい Python には内容別の3言語説明、Markdown には3言語の案内を追加します。国際化変更時は `node --check static/i18n.js` も確認します。
 - 中文：维护 `static/locales.json` 中英日文案，验证初始与动态文字；切换时不翻译用户输入、译文段落、真实源码和 Skill 原文。模型解释使用任务开始时的语言。新增 Python 文件需具体三语模块说明，新增 Markdown 需三语阅读说明；国际化变更也检查 `node --check static/i18n.js`。
+
+## Project keywords / プロジェクトの検索用語 / 项目检索关键词
+
+**English:** AI agent tutorial; Agent Skills; SKILL.md; Model Context Protocol (MCP); Python AI agent example; MCP client/server; stdio; tool calling; function calling; OpenAI Responses API; Chinese Japanese English translator; bilingual comparison; translation explanation; language learning; workflow visualization; step-by-step debugging; internationalization (i18n); local web app; free online translation without an API key.
+
+**日本語：** AIエージェント入門、Agent Skills、MCP 学習、Model Context Protocol、Python サンプル、MCPクライアント・サーバー、ツール呼び出し、関数呼び出し、OpenAI Responses API、中国語・日本語・英語の翻訳、対訳比較、意味と用法、語学学習、フロー可視化、ステップ実行、国際化、多言語Webアプリ、APIキー不要の無料オンライン翻訳。
+
+**中文：** AI 智能体教程、Agent Skills 技能开发、MCP 模型上下文协议、Python 示例、MCP 客户端服务器、工具调用、函数调用、OpenAI Responses API、中日英翻译、双语对照、词义与用法解释、语言学习、流程可视化、单步调试、国际化 i18n、多语言网页、无需密钥的免费联网翻译。
+
+English: Use accurate terminology when maintaining descriptions; keep the distinction between free online translation and optional LLM mode. 日本語：説明には実装に合う用語を使い、無料オンライン翻訳と任意の LLM モードを区別してください。中文：维护说明时使用与实际功能一致的关键词，区分免费联网翻译与可选大模型模式。
