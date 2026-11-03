@@ -1,5 +1,19 @@
 # 逐文件代码导读
 
+## English
+
+Code walkthrough: main.py validates CLI options, agent.py orchestrates model/tool rounds, skill_router.py selects pair rules, and mcp_bridge.py connects mcp_server.py to the local glossary.
+
+## 日本語
+
+コードの解説です。main.py が CLI を受け、agent.py がモデルとツールを制御し、skill_router.py が規則を選び、mcp_bridge.py が mcp_server.py と用語集に接続します。
+
+## 中文
+
+代码导读：main.py 接收 CLI，agent.py 编排模型与工具循环，skill_router.py 选择规则，mcp_bridge.py 连接 mcp_server.py 及本地术语表。
+
+---
+
 ## 1. 先区分四种东西
 
 `agent.py` 是执行程序；`SKILL.md` 是指导模型的文字；`lookup_term` 是可执行工具；MCP 是程序访问该工具的协议。

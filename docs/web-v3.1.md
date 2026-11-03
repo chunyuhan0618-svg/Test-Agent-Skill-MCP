@@ -1,5 +1,19 @@
 # v3.1.0：可调宽流程面板与一步到底
 
+## English
+
+Version 3.1 introduced a half-width resizable workflow panel, fixed bottom controls and Run to end. The backend still records actual checkpoints and supports cancellation.
+
+## 日本語
+
+3.1 では半画面の幅調整パネル、下部固定ボタン、最後まで実行を追加しました。実際の停止点は引き続き記録され、キャンセルできます。
+
+## 中文
+
+3.1 引入半屏可调宽流程面板、底部固定按钮和一步到底；后端仍记录真实检查点并支持取消。
+
+---
+
 本版在 v3.0.0 的真实单步调试上改进布局和操作方式，原有免费翻译、大模型模式、Skill/MCP 流程及代码行展示均保留。
 
 ## 1. 更新与启动

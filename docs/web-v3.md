@@ -1,5 +1,19 @@
 # V3.0.0：看得见、可单步执行的 Agent / Skill / MCP 流程
 
+## English
+
+Historical introduction to real workflow debugging: execution pauses at key Agent, Skill, MCP and Engine checkpoints. Use Next to release a checkpoint. This is not a debugger for every Python statement.
+
+## 日本語
+
+実際のフローデバッグの導入記録です。Agent・Skill・MCP・Engine の主要地点で停止し、「次へ」で進みます。Python の全行デバッガーではありません。
+
+## 中文
+
+真实流程调试的历史导读：在 Agent、Skill、MCP、Engine 关键步骤暂停，用下一步放行；并非逐条 Python 语句调试器。
+
+---
+
 v3.1.0 已追加半屏可拖拽布局、底部固定按钮与一步到底，详见 [v3.1.0 使用说明](web-v3.1.md)。下文保留 v3.0.0 的基础执行机制说明。
 
 ## 1. 如何使用

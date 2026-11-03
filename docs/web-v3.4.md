@@ -1,5 +1,19 @@
 # v3.4.0：公开使用说明与三语协作指南
 
+## English
+
+Version 3.4 removed machine-specific paths, documented portable installation and startup, and added a trilingual AGENTS.md. Run web.py from the project root; MCP starts automatically.
+
+## 日本語
+
+3.4 では固定パスを除き、汎用のインストール・起動手順と3言語の AGENTS.md を追加しました。ルートで web.py を実行すると MCP も自動起動します。
+
+## 中文
+
+3.4 清理机器固定路径、补充可移植安装和启动步骤，并新增三语 AGENTS.md；从项目根目录启动 web.py，MCP 自动启动。
+
+---
+
 日期：2026-11-03（日本时间）。提交目标：`current-draft`。
 
 ## 安装并启动 Agent

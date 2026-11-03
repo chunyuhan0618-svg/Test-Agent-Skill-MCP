@@ -47,3 +47,9 @@ README.md の依存関係をインストール後、プロジェクトルート�
 Open / 開く / 浏览器访问：http://127.0.0.1:8000 。Stop / 停止：Ctrl+C。
 For JavaScript changes / JavaScript 変更時 / 修改 JavaScript 时：`node --check static/app.js` and `node --check static/debug.js`。
 Before commit / コミット前 / 提交前：`git diff --check`。
+
+## Internationalization / 国際化 / 国际化
+
+- English: maintain English, Japanese and Chinese entries in `static/locales.json`; verify both initial and dynamically inserted UI text. Do not translate user input, translation paragraphs, actual source code or original Skill source. Model explanations follow the task-start language. Add specific trilingual module guidance to new Python files and trilingual reading guidance to new Markdown files. Also check `node --check static/i18n.js` when modifying localization.
+- 日本語：`static/locales.json` の英語・日本語・中国語を維持し、初期表示と動的表示を確認します。原文・訳文・実際のコード・Skill 原文は表示切替で翻訳しません。モデル説明は開始時の言語を使います。新しい Python には内容別の3言語説明、Markdown には3言語の案内を追加します。国際化変更時は `node --check static/i18n.js` も確認します。
+- 中文：维护 `static/locales.json` 中英日文案，验证初始与动态文字；切换时不翻译用户输入、译文段落、真实源码和 Skill 原文。模型解释使用任务开始时的语言。新增 Python 文件需具体三语模块说明，新增 Markdown 需三语阅读说明；国际化变更也检查 `node --check static/i18n.js`。

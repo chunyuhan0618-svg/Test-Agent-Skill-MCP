@@ -1,4 +1,7 @@
-"""无需模型和 Key 的联网翻译；只调用 MyMemory GET，不上传翻译记忆。"""
+"""English: Translate through MyMemory GET requests without an LLM or key. Split by UTF-8 byte limits, preserve source text, and attach local MCP glossary notes.
+日本語：LLM やキーを使わず MyMemory の GET 要求で翻訳します。UTF-8 のバイト制限で分割し、原文を保持し、MCP 用語情報を付けます。
+中文：通过 MyMemory GET 无模型无密钥翻译，按 UTF-8 字节限制分段，保留原文并附加 MCP 本地术语资料。
+"""
 import html
 import re
 

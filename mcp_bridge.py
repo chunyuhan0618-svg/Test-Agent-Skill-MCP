@@ -1,4 +1,7 @@
-"""连接本地 MCP 子进程，并适配 MCP 工具与 Responses function calling。"""
+"""English: Own the local stdio MCP connection lifecycle, adapt tool schemas, and validate terminology tool requests and results.
+日本語：ローカル stdio MCP 接続の開始・終了、ツール定義の変換、用語検索の要求と結果の検証を行います。
+中文：管理本地 stdio MCP 连接生命周期、转换工具定义，并校验术语查询请求和结果。
+"""
 import asyncio
 import json
 import sys

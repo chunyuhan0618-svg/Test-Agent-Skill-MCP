@@ -1,5 +1,19 @@
 # 第二版：本地独立运行的三栏网页
 
+## English
+
+Historical web architecture: three selectable bilingual columns, optional free/LLM modes, structured responses and per-request credentials. For current installation and English-default UI, use README.md.
+
+## 日本語
+
+Web 版の構成記録です。3組の対訳選択、無料/LLM モード、構造化応答、要求別キーを扱います。現在のインストールと英語初期表示は README.md を参照してください。
+
+## 中文
+
+网页架构记录：三组可选对照、免费/模型模式、结构化输出和请求级凭据。当前安装和默认英文界面见 README.md。
+
+---
+
 ## 最新更新：模型与 Key 改为选填
 
 默认选择“不指定模型 · 免费翻译”，Key 留空也可直接翻译。服务端在两项均已填写时调用原有 OpenAI Agent；任意一项留空时调用 `free_translation.py`。前端和后端都已移除必填限制。

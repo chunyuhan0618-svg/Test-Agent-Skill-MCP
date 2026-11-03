@@ -1,4 +1,7 @@
-"""离线模型替身 + 真实 MCP 子进程：不需要 API Key，不评估翻译质量。"""
+"""English: Test routing, input validation, bounded model/tool execution and real MCP integration using local model response substitutes. No paid API calls.
+日本語：ローカルのモデル応答代替を使い、ルーティング・入力検証・処理上限・実際の MCP 統合を検証します。有料 API は呼びません。
+中文：使用本地模型响应替身测试路由、输入校验、循环上限和真实 MCP 集成，不调用付费 API。
+"""
 import json
 import unittest
 from functools import wraps

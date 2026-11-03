@@ -1,5 +1,19 @@
 # 验证记录
 
+## English
+
+Historical validation for the CLI implementation: local SDK response substitutes and real MCP verify integration, not live model quality or account access. See the current release record for later checks.
+
+## 日本語
+
+CLI 実装時の検証記録です。SDK のローカル応答代替と実際の MCP で統合を確認し、実モデルの品質やアカウント権限は検証しません。後続の確認は現行版の記録を参照してください。
+
+## 中文
+
+CLI 的历史验证记录；本地 SDK 响应替身及真实 MCP 验证集成，不证明线上模型质量或账号权限。后续验证见当前版本记录。
+
+---
+
 验证日期：2026-10-30。环境：Windows、Python 3.12.14。
 
 ## 已实际执行

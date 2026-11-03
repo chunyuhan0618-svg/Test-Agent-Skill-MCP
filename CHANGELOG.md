@@ -1,11 +1,26 @@
 # 版本记录
 
-本项目采用以下版本号记录已确认的开发阶段。各阶段日期见对应记录（日本时间）。当前功能版本：**v3.4.0**。
+## English
+
+Release history and verification scope. Current release is v3.5.0; earlier version descriptions retain their historical behavior.
+
+## 日本語
+
+変更履歴と検証範囲です。現在は v3.5.0 で、旧版の説明は当時の動作を記録しています。
+
+## 中文
+
+版本历史及验证范围；当前版本为 v3.5.0，旧版说明保留当时的功能事实。
+
+---
+
+本项目采用以下版本号记录已确认的开发阶段。各阶段日期见对应记录（日本时间）。当前功能版本：**v3.5.0**。
 
 表中的链接指向各阶段完成时的不可变代码提交。本文件是版本说明，不代表已创建同名 Git 标签或正式 GitHub Release；文档维护提交也不会改变上述功能版本对应的代码提交。
 
 | 版本 | 名称 | 主要变化 | 验证结果 | 对应代码提交 |
 |---|---|---|---|---|
+| v3.5.0 | 国际版 | 默认英文、三语界面、Markdown/Python 三语说明 | 46 项测试通过 | [说明](docs/web-v3.5.md) |
 | v3.4.0 | 公开使用说明版 | 可移植目录、完整启动步骤、三语 AGENTS.md | 41 项测试通过 | [说明](docs/web-v3.4.md) |
 | v3.2.0 | 流程学习入口版 | 更新学习主题标题、移除介绍区、默认开启流程调试 | 41 项测试通过 | [5e1d785](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/5e1d785e607820f4c665345478d85bbec1ac6e0e) |
 | v3.1.0 | 可调宽流程调试版 | 半屏可拖拽流程面板、底部固定按钮、一步到底 | 41 项测试通过 | [0be2caa](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/0be2caa4645569198384957c3f63b6d8addad6f8) |
@@ -14,6 +29,16 @@
 | v2.0.1 | 错误提示修正版 | 区分余额、消费/用量上限与请求限速 | 10 项网页相关测试通过 | [aa0b05d](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/aa0b05df0c233fa18c44f9543c3801706dad681a) |
 | v2.0.0 | 网页版 | 三栏对照、组合勾选、模型选择与 Key 输入 | 20 项测试通过 | [dab1e10](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/dab1e10c020f77103a67226f37515a18886d2da3) |
 | v1.0.0 | 命令行版 | 一个 Agent、三个双向 Skill、真实 MCP 术语查询 | 11 项测试通过 | [2fc5751](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/2fc5751ea45c93ee2fa294e4d0d645b572f06f07) |
+
+## v3.5.0 — International edition / 国際版 / 国际版
+
+Date / 日付 / 日期：2026-11-03。Branch / ブランチ / 分支：`current-draft`。
+
+- English: English-default UI with live Chinese/Japanese switching, localized dynamic status, workflow and errors; request-scoped model explanation language. Every Markdown and Python file includes trilingual explanations; Skill rules have equivalent translations. No new runtime dependencies.
+- 日本語：英語を初期表示とし、中国語・日本語へ即時切替できます。動的状態・フロー・エラーとモデル説明の言語に対応。全 Markdown/Python に3言語の説明、Skill に同等の翻訳を追加しました。実行依存関係の追加はありません。
+- 中文：默认英文并支持中英日即时切换，覆盖动态状态、流程和错误；按请求隔离模型解释语言。所有 Markdown/Python 增加三语说明，Skill 补齐等价翻译；无新增运行依赖。
+
+See / 参照 / 详见：[v3.5.0](docs/web-v3.5.md)。
 
 ## v3.4.0 — 公开使用说明版
 

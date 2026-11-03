@@ -3,3 +3,6 @@
 
 .page-title{flex:1;min-width:0;margin:0;font-size:24px;font-weight:600;line-height:1.6;letter-spacing:0;color:#244d40}
 @media(max-width:650px){header{flex-wrap:wrap;gap:10px}.page-title{flex-basis:100%;font-size:20px}.version{white-space:nowrap}}
+
+/* English / 日本語 / 中文: responsive interface language selector. */
+.ui-language{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px}.ui-language select{width:auto;min-width:110px;padding:8px}header{flex-wrap:wrap;gap:12px}.page-title{flex:1;min-width:220px}

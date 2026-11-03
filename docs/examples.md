@@ -1,5 +1,19 @@
 # 六个方向的运行示例
 
+## English
+
+CLI examples cover all six directions across Chinese, Japanese and English. Run commands from the project root with the installed virtual environment. --demo checks MCP only; omit it for configured model translation.
+
+## 日本語
+
+CLI の例で中国語・日本語・英語の6方向を確認できます。プロジェクトルートで仮想環境の Python を使います。--demo は MCP 確認のみで、モデル設定後に外すと翻訳します。
+
+## 中文
+
+本文列出中日英六向 CLI 示例；从项目根目录使用虚拟环境 Python 运行，--demo 仅验证 MCP，配置模型并去掉该参数才执行模型翻译。
+
+---
+
 以下命令在已激活的虚拟环境中执行。Windows 也可把 `python` 替换为 `.\.venv\Scripts\python.exe`。正常模式需要 `.env`；在命令末尾添加 `--demo` 就只验证 Skill 和 MCP。
 
 | 方向 | 应选 Skill | 测试重点 |

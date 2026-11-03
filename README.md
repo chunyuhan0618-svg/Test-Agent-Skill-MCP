@@ -1,11 +1,68 @@
-# 通过翻译产品理解 Agent、Skill、MCP：v3.4.0
+# 通过翻译产品理解 Agent、Skill、MCP：v3.5.0
+
+## English — Install and run
+
+This educational translation app demonstrates an **Agent** orchestrating three bilingual **Skills** (Chinese–Japanese, Chinese–English, Japanese–English) and a real local **MCP** terminology tool. The interface defaults to **English**; use **Interface language** at the top to switch to Chinese or Japanese. Labels, menus, guidance, errors, workflow steps and local glossary notes switch immediately, without changing your input, translation text or actual source code.
+
+Install Git and Python 3.11+ (3.12 recommended). In any directory of your choice, clone the development release:
+
+```bash
+git clone --branch current-draft https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP.git
+cd Test-Agent-Skill-MCP
+```
+
+Windows PowerShell:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe web.py
+```
+
+macOS / Linux:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python web.py
+```
+
+Open **http://127.0.0.1:8000**. Keep the terminal running. Enter text, choose its source language and the pairs to compare, then click **Translate selected pairs**. Workflow debugging is enabled by default: use **Next** or **Run to end**; uncheck the workflow option to translate directly. Stop the server with **Ctrl+C**. Next time, run the same `web.py` command from the project root. Append `--port 8002` if needed, then open the matching address. MCP starts automatically; no separate server terminal is needed.
+
+Model and API key are optional. Free mode sends source text to **MyMemory** over the internet (up to 1,000 characters/request and provider quota); it is machine translation plus local MCP notes, without LLM semantic analysis. Providing both a model and key enables **OpenAI** mode and may incur API charges. Model-generated explanations use the interface language selected when starting the task; to regenerate existing model explanations in a different language, start a new task. API keys remain in page/request memory and are not saved. No Codex, Node.js or frontend build is required to run the app.
+
+CLI diagnostic: run the virtual environment Python with `main.py --text "Please review" --source en --target ja --demo`. This loads a real Skill and queries MCP but does **not** translate. For CLI model translation, copy `.env.example` to `.env`, configure your key and model, omit `--demo`, and choose `--explain en`, `ja` or `zh`.
+
+Python file headers explain each module in English, Japanese and Chinese. Every Markdown file includes trilingual guidance; Skills include equivalent rules in all three languages. Source code and Skill source are shown as recorded rather than rewritten when switching the UI. See [the architecture walkthrough](docs/walkthrough.md), [contribution instructions](AGENTS.md), and [v3.5.0 details](docs/web-v3.5.md).
+
+## 日本語 — インストールと起動
+
+この学習用翻訳アプリでは、**Agent** が中国語・日本語・英語の3組の **Skill** を選び、実際のローカル **MCP** 用語ツールを呼び出します。初期表示は**英語**です。上部の **Interface language / 表示言語** で日本語・中国語・英語を切り替えると、ラベル・メニュー・説明・エラー・フロー・ローカル用語情報が変わります。入力原文・訳文・実際のソースコードは変えません。
+
+Git と Python 3.11以上（3.12推奨）を用意します。任意の親フォルダーで上記の `git clone --branch current-draft ...` と `cd Test-Agent-Skill-MCP` を実行し、OS に合う仮想環境作成・依存関係インストール・`web.py` 起動コマンドを順に実行してください。Windows は `.\.venv\Scripts\python.exe`、macOS/Linux は `.venv/bin/python` を使い、仮想環境の有効化は必須ではありません。
+
+ブラウザーで **http://127.0.0.1:8000** を開きます。端末は開いたままにし、原文・原文言語・対訳の組を指定して **対訳を開始** を押します。初期状態ではステップ実行が有効なので、**次へ** または **最後まで実行** を押してください。フローのチェックを外すと直接翻訳します。停止は **Ctrl+C**、次回はプロジェクトルートで同じ `web.py` 起動コマンドを実行します。ポート使用中なら `--port 8002` を付けて対応アドレスを開きます。MCP は自動起動するため別端末は不要です。
+
+モデルと API キーは任意です。無料モードは原文を **MyMemory** に送信し、1回最大1,000文字と提供元の制限があります。LLM は使わず、説明はローカル MCP 用語情報です。モデルとキーの両方を指定すると **OpenAI** モードとなり、料金が発生する場合があります。モデルの説明はタスク開始時の表示言語で生成されます。生成済み説明を別言語にするには新しいタスクを開始します。キーは保存しません。実行に Codex・Node.js・フロントエンドのビルドは不要です。
+
+CLI の確認は仮想環境の Python で `main.py --text "Please review" --source en --target ja --demo` を実行します。これは実際の Skill/MCP を確認しますが、翻訳は生成しません。CLI 翻訳には `.env.example` を `.env` にコピーしてキーとモデルを設定し、`--demo` を外して `--explain ja` などを指定します。
+
+各 Python ファイルの先頭と全 Markdown に3言語の説明を追加し、Skill には同等の3言語ルールを記載しています。[構成の解説](docs/walkthrough.md)、[作業ガイド](AGENTS.md)、[v3.5.0 の詳細](docs/web-v3.5.md)も参照してください。
+
+## 中文 — 国际版使用说明
+
+v3.5.0 默认英文显示；在页首“界面语言”选择中文、英文或日文，可即时切换菜单、说明、错误、流程节点及本地术语说明。界面语言独立于原文语言，不改变输入、译文及真实源码。大模型解释使用开始任务时的界面语言；已有模型解释需重新运行任务才能按新语言生成。
+
+下文保留完整中文安装和使用说明。所有 Python 文件新增具体三语模块说明，所有 Markdown 文件新增三语阅读指引，三个 Skill 与共享规则补充等价英文、日文说明。详见 [v3.5.0](docs/web-v3.5.md)。
+
 
 ## 版本信息
 
-当前功能版本为 **v3.4.0（公开使用说明版）**。完整历史见 [CHANGELOG.md](CHANGELOG.md)。以下版本号记录开发阶段及对应代码提交，不代表已发布同名 Git 标签或 GitHub Release。
+当前功能版本为 **v3.5.0（国际版）**。完整历史见 [CHANGELOG.md](CHANGELOG.md)。以下版本号记录开发阶段及对应代码提交，不代表已发布同名 Git 标签或 GitHub Release。
 
 | 版本 | 名称 | 主要变化 | 验证结果 | 对应代码提交 |
 |---|---|---|---|---|
+| v3.5.0 | 国际版 | 默认英文、三语界面、Markdown/Python 三语说明 | 46 项测试通过 | [说明](docs/web-v3.5.md) |
 | v3.4.0 | 公开使用说明版 | 可移植目录、完整启动步骤、三语 AGENTS.md | 41 项测试通过 | [说明](docs/web-v3.4.md) |
 | v3.2.0 | 流程学习入口版 | 更新学习主题标题、移除介绍区、默认开启流程调试 | 41 项测试通过 | [5e1d785](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/5e1d785e607820f4c665345478d85bbec1ac6e0e) |
 | v3.1.0 | 可调宽流程调试版 | 半屏可拖拽流程面板、底部固定按钮、一步到底 | 41 项测试通过 | [0be2caa](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/0be2caa4645569198384957c3f63b6d8addad6f8) |

@@ -1,5 +1,19 @@
 # v3.2.0：通过翻译产品理解执行流程
 
+## English
+
+Version 3.2 changed the learning title, removed the promotional introduction and enabled workflow debugging by default. Historical screenshots and counts describe that version.
+
+## 日本語
+
+3.2 では学習用タイトルへの変更、宣伝部分の削除、フローデバッグの初期有効化を行いました。画像や件数は当時の記録です。
+
+## 中文
+
+3.2 修改学习标题、删除宣传介绍并默认开启流程调试；历史截图和数量描述当时版本。
+
+---
+
 日期：2026-11-03（日本时间）。本地目录：`Test-Agent-Skill-MCP`。提交目标：`current-draft`。
 
 ## 页面变化

@@ -1,0 +1,842 @@
+{
+  "通过一个翻译产品来理解 Agent，SKILL，MCP的流程。": {
+    "en": "Understand Agent, Skill and MCP through a translation app.",
+    "ja": "翻訳アプリで Agent・Skill・MCP の流れを理解する。",
+    "zh": "通过一个翻译产品来理解 Agent，SKILL，MCP的流程。"
+  },
+  "通过翻译产品理解 Agent、Skill、MCP 的流程": {
+    "en": "Understand Agent, Skill and MCP",
+    "ja": "Agent・Skill・MCP の流れを理解する",
+    "zh": "通过翻译产品理解 Agent、Skill、MCP 的流程"
+  },
+  "v3.5.0 · 流程调试": {
+    "en": "v3.5.0 · Execution debugger",
+    "ja": "v3.5.0 · 実行デバッグ",
+    "zh": "v3.5.0 · 流程调试"
+  },
+  "界面语言": {
+    "en": "Interface language",
+    "ja": "表示言語",
+    "zh": "界面语言"
+  },
+  "显示流程图 · 单步调试": {
+    "en": "Show workflow · Step debugging",
+    "ja": "フロー表示・ステップ実行",
+    "zh": "显示流程图 · 单步调试"
+  },
+  "默认启用，开始后点击“下一步”；取消勾选可直接翻译。": {
+    "en": "Enabled by default. Click Next after starting, or uncheck to translate directly.",
+    "ja": "初期状態は有効です。開始後は「次へ」を押すか、チェックを外して直接翻訳します。",
+    "zh": "默认启用，开始后点击“下一步”；取消勾选可直接翻译。"
+  },
+  "模型设置": {
+    "en": "Model settings",
+    "ja": "モデル設定",
+    "zh": "模型设置"
+  },
+  "大语言模型": {
+    "en": "Language model",
+    "ja": "大規模言語モデル",
+    "zh": "大语言模型"
+  },
+  "选填": {
+    "en": "Optional",
+    "ja": "任意",
+    "zh": "选填"
+  },
+  "不指定模型 · 免费翻译": {
+    "en": "No model · Free translation",
+    "ja": "モデル指定なし・無料翻訳",
+    "zh": "不指定模型 · 免费翻译"
+  },
+  "自定义模型 ID…": {
+    "en": "Custom model ID…",
+    "ja": "カスタムモデル ID…",
+    "zh": "自定义模型 ID…"
+  },
+  "自定义模型 ID": {
+    "en": "Custom model ID",
+    "ja": "カスタムモデル ID",
+    "zh": "自定义模型 ID"
+  },
+  "输入账号可用的模型 ID": {
+    "en": "Enter a model ID available to your account",
+    "ja": "利用可能なモデル ID を入力",
+    "zh": "输入账号可用的模型 ID"
+  },
+  "选填 · 仅本次使用": {
+    "en": "Optional · This session only",
+    "ja": "任意・今回のみ使用",
+    "zh": "选填 · 仅本次使用"
+  },
+  "留空也可翻译；使用大模型时填写": {
+    "en": "Leave blank for free translation; required for LLM mode",
+    "ja": "無料翻訳では空欄可。LLM 利用時に入力",
+    "zh": "留空也可翻译；使用大模型时填写"
+  },
+  "显示 API Key": {
+    "en": "Show API key",
+    "ja": "API キーを表示",
+    "zh": "显示 API Key"
+  },
+  "隐藏 API Key": {
+    "en": "Hide API key",
+    "ja": "API キーを隠す",
+    "zh": "隐藏 API Key"
+  },
+  "显示": {
+    "en": "Show",
+    "ja": "表示",
+    "zh": "显示"
+  },
+  "隐藏": {
+    "en": "Hide",
+    "ja": "隠す",
+    "zh": "隐藏"
+  },
+  "待翻译原文": {
+    "en": "Source text",
+    "ja": "翻訳する原文",
+    "zh": "待翻译原文"
+  },
+  "原文语言": {
+    "en": "Source language",
+    "ja": "原文の言語",
+    "zh": "原文语言"
+  },
+  "中文": {
+    "en": "Chinese",
+    "ja": "中国語",
+    "zh": "中文"
+  },
+  "日本語": {
+    "en": "Japanese",
+    "ja": "日本語",
+    "zh": "日本語"
+  },
+  "在这里输入一句话、一封邮件，或一段想读懂的内容…": {
+    "en": "Enter a sentence, an email, or a passage you want to understand…",
+    "ja": "理解したい文章やメールを入力してください…",
+    "zh": "在这里输入一句话、一封邮件，或一段想读懂的内容…"
+  },
+  "试试示例 ↗": {
+    "en": "Try an example ↗",
+    "ja": "例文を試す ↗",
+    "zh": "试试示例 ↗"
+  },
+  "选择对照组合": {
+    "en": "Choose language pairs",
+    "ja": "対訳の組み合わせを選択",
+    "zh": "选择对照组合"
+  },
+  "中日对照": {
+    "en": "Chinese–Japanese",
+    "ja": "中国語・日本語",
+    "zh": "中日对照"
+  },
+  "中英对照": {
+    "en": "Chinese–English",
+    "ja": "中国語・英語",
+    "zh": "中英对照"
+  },
+  "日英对照": {
+    "en": "Japanese–English",
+    "ja": "日本語・英語",
+    "zh": "日英对照"
+  },
+  "开始对照翻译": {
+    "en": "Translate selected pairs",
+    "ja": "対訳を開始",
+    "zh": "开始对照翻译"
+  },
+  "开始对照翻译 →": {
+    "en": "Translate selected pairs →",
+    "ja": "対訳を開始 →",
+    "zh": "开始对照翻译 →"
+  },
+  "免费模式：无需模型和 Key，原文将发送至 MyMemory 翻译服务，需联网，有每日额度；每次最多 1000 字符。解释使用本地术语资料。取消勾选的组合不翻译。": {
+    "en": "Free mode: no model or key required. Source text is sent to MyMemory. Internet access and daily quota apply; up to 1,000 characters per request. Notes use the local glossary. Unchecked pairs are skipped.",
+    "ja": "無料モード：モデルとキーは不要です。原文は MyMemory に送信されます。通信・1日あたりの制限があり、1回最大1,000文字です。説明はローカル用語集に基づき、未選択の組み合わせは翻訳しません。",
+    "zh": "免费模式：无需模型和 Key，原文将发送至 MyMemory 翻译服务，需联网，有每日额度；每次最多 1000 字符。解释使用本地术语资料。取消勾选的组合不翻译。"
+  },
+  "大模型模式：使用所选模型与 API Key，原文发送至 OpenAI，可能产生 API 费用。取消勾选的组合不翻译。": {
+    "en": "LLM mode: uses your selected model and API key. Source text is sent to OpenAI and API charges may apply. Unchecked pairs are skipped.",
+    "ja": "LLM モード：指定モデルと API キーを使い、原文を OpenAI に送信します。API 料金が発生する場合があります。未選択の組み合わせは翻訳しません。",
+    "zh": "大模型模式：使用所选模型与 API Key，原文发送至 OpenAI，可能产生 API 费用。取消勾选的组合不翻译。"
+  },
+  "已选择 3 组对照，等待输入。": {
+    "en": "3 pairs selected. Ready for input.",
+    "ja": "3組を選択中。入力を待っています。",
+    "zh": "已选择 3 组对照，等待输入。"
+  },
+  "翻译对照结果": {
+    "en": "Translation results",
+    "ja": "対訳結果",
+    "zh": "翻译对照结果"
+  },
+  "待翻译": {
+    "en": "Ready",
+    "ja": "翻訳待ち",
+    "zh": "待翻译"
+  },
+  "中 / 日": {
+    "en": "ZH / JA",
+    "ja": "中国語 / 日本語",
+    "zh": "中 / 日"
+  },
+  "中 / EN": {
+    "en": "ZH / EN",
+    "ja": "中国語 / 英語",
+    "zh": "中 / EN"
+  },
+  "日 / EN": {
+    "en": "JA / EN",
+    "ja": "日本語 / 英語",
+    "zh": "日 / EN"
+  },
+  "中文与日文，准确表达每一层意思。": {
+    "en": "Explore meaning in Chinese and Japanese.",
+    "ja": "中国語と日本語で意味を確かめます。",
+    "zh": "中文与日文，准确表达每一层意思。"
+  },
+  "从字面到语境，找到自然的表达。": {
+    "en": "Find natural expressions in context.",
+    "ja": "文脈に合う自然な表現を探します。",
+    "zh": "从字面到语境，找到自然的表达。"
+  },
+  "看懂语序、敬语与微妙的语气。": {
+    "en": "Understand word order, politeness and tone.",
+    "ja": "語順・敬語・微妙なニュアンスを理解します。",
+    "zh": "看懂语序、敬语与微妙的语气。"
+  },
+  "调整流程图宽度": {
+    "en": "Resize workflow panel",
+    "ja": "フローパネルの幅を調整",
+    "zh": "调整流程图宽度"
+  },
+  "程序执行流程": {
+    "en": "Program execution workflow",
+    "ja": "プログラムの実行フロー",
+    "zh": "程序执行流程"
+  },
+  "看见程序如何工作": {
+    "en": "See how the program works",
+    "ja": "プログラムの動きを見る",
+    "zh": "看见程序如何工作"
+  },
+  "Agent 负责推进，Skill 提供规则，MCP 连接工具。免费模式由程序编排，不会调用大模型。": {
+    "en": "Agent orchestrates, Skills supply rules, and MCP connects tools. Free mode uses program orchestration without an LLM.",
+    "ja": "Agent が進行し、Skill が規則を提供し、MCP がツールにつなぎます。無料モードはプログラムが制御し、LLM は呼び出しません。",
+    "zh": "Agent 负责推进，Skill 提供规则，MCP 连接工具。免费模式由程序编排，不会调用大模型。"
+  },
+  "准备就绪。开始翻译后，将停在第一步。": {
+    "en": "Ready. Translation will pause at the first step.",
+    "ja": "準備完了。翻訳開始後、最初のステップで停止します。",
+    "zh": "准备就绪。开始翻译后，将停在第一步。"
+  },
+  "实际执行步骤": {
+    "en": "Actual execution steps",
+    "ja": "実際の実行ステップ",
+    "zh": "实际执行步骤"
+  },
+  "开始翻译 → Agent 选择组合 → Skill → 翻译引擎 → MCP → Agent 交付结果": {
+    "en": "Start → Agent selects pair → Skill → Translation engine → MCP → Agent delivers results",
+    "ja": "翻訳開始 → Agent が組を選択 → Skill → 翻訳エンジン → MCP → Agent が結果を返す",
+    "zh": "开始翻译 → Agent 选择组合 → Skill → 翻译引擎 → MCP → Agent 交付结果"
+  },
+  "当前步骤代码": {
+    "en": "Current step source code",
+    "ja": "現在のステップのコード",
+    "zh": "当前步骤代码"
+  },
+  "等待执行位置": {
+    "en": "Waiting for execution location",
+    "ja": "実行位置を待っています",
+    "zh": "等待执行位置"
+  },
+  "每次暂停会显示真实源文件及下一段代码的起始行。点击流程节点可查看已执行步骤。": {
+    "en": "Each pause shows the actual source file and next code location. Click a node to inspect a recorded step.",
+    "ja": "停止時に実際のソースと次のコード位置を表示します。ノードを押すと記録済みステップを確認できます。",
+    "zh": "每次暂停会显示真实源文件及下一段代码的起始行。点击流程节点可查看已执行步骤。"
+  },
+  "# 勾选需要的组合，然后开始翻译。": {
+    "en": "# Select language pairs, then start translating.",
+    "ja": "# 組み合わせを選び、翻訳を開始してください。",
+    "zh": "# 勾选需要的组合，然后开始翻译。"
+  },
+  "查看本步 Skill 原文": {
+    "en": "View this step’s Skill source",
+    "ja": "このステップの Skill 原文を表示",
+    "zh": "查看本步 Skill 原文"
+  },
+  "关键步骤断点，不是逐条 Python 语句调试；未点击前不会执行该步骤。暂停 5 分钟自动结束。": {
+    "en": "Breakpoints pause at key operations, not every Python statement. A step runs only after you advance it. Pauses expire after 5 minutes.",
+    "ja": "主要操作で停止する機能であり、Python の全行デバッグではありません。操作するまで次を実行せず、5分間の停止で終了します。",
+    "zh": "关键步骤断点，不是逐条 Python 语句调试；未点击前不会执行该步骤。暂停 5 分钟自动结束。"
+  },
+  "下一步 →": {
+    "en": "Next →",
+    "ja": "次へ →",
+    "zh": "下一步 →"
+  },
+  "一步到底": {
+    "en": "Run to end",
+    "ja": "最後まで実行",
+    "zh": "一步到底"
+  },
+  "结束调试": {
+    "en": "End debugging",
+    "ja": "デバッグ終了",
+    "zh": "结束调试"
+  },
+  "言间 · TRANSLATE WITH UNDERSTANDING": {
+    "en": "TRANSLATE WITH UNDERSTANDING",
+    "ja": "意味を理解して翻訳する",
+    "zh": "言间 · TRANSLATE WITH UNDERSTANDING"
+  },
+  "已完成": {
+    "en": "Completed",
+    "ja": "完了",
+    "zh": "已完成"
+  },
+  "意思解释": {
+    "en": "Meaning and context",
+    "ja": "意味と文脈",
+    "zh": "意思解释"
+  },
+  "关键词与用法": {
+    "en": "Keywords and usage",
+    "ja": "キーワードと用法",
+    "zh": "关键词与用法"
+  },
+  "术语参考": {
+    "en": "Terminology references",
+    "ja": "用語の参考情報",
+    "zh": "术语参考"
+  },
+  "本组已关闭，不进行对照翻译。": {
+    "en": "This pair is disabled and will not be translated.",
+    "ja": "この組は無効です。翻訳しません。",
+    "zh": "本组已关闭，不进行对照翻译。"
+  },
+  "未启用": {
+    "en": "Disabled",
+    "ja": "無効",
+    "zh": "未启用"
+  },
+  "输入原文后，开始本组对照。": {
+    "en": "Enter source text to translate this pair.",
+    "ja": "原文を入力すると、この組を翻訳できます。",
+    "zh": "输入原文后，开始本组对照。"
+  },
+  "请至少选择一组对照。": {
+    "en": "Select at least one language pair.",
+    "ja": "1組以上選択してください。",
+    "zh": "请至少选择一组对照。"
+  },
+  "请填写原文，并选择至少一组对照。": {
+    "en": "Enter source text and select at least one pair.",
+    "ja": "原文を入力し、1組以上選択してください。",
+    "zh": "请填写原文，并选择至少一组对照。"
+  },
+  "请填写自定义模型 ID，或选择“不指定模型”使用免费翻译。": {
+    "en": "Enter a custom model ID, or choose No model for free translation.",
+    "ja": "モデル ID を入力するか、無料翻訳の「モデル指定なし」を選んでください。",
+    "zh": "请填写自定义模型 ID，或选择“不指定模型”使用免费翻译。"
+  },
+  "免费模式每次最多 1000 字符，请缩短原文。": {
+    "en": "Free mode allows up to 1,000 characters. Shorten the source text.",
+    "ja": "無料モードは1回最大1,000文字です。原文を短くしてください。",
+    "zh": "免费模式每次最多 1000 字符，请缩短原文。"
+  },
+  "正在对照翻译…": {
+    "en": "Translating…",
+    "ja": "翻訳中…",
+    "zh": "正在对照翻译…"
+  },
+  "正在理解原文、查询术语并生成对照…": {
+    "en": "Processing text, looking up terminology and translating…",
+    "ja": "原文の処理・用語検索・翻訳を実行中…",
+    "zh": "正在理解原文、查询术语并生成对照…"
+  },
+  "翻译中": {
+    "en": "Translating",
+    "ja": "翻訳中",
+    "zh": "翻译中"
+  },
+  "失败": {
+    "en": "Failed",
+    "ja": "失敗",
+    "zh": "失败"
+  },
+  "翻译失败，请稍后重试。": {
+    "en": "Translation failed. Please try again later.",
+    "ja": "翻訳に失敗しました。後でもう一度お試しください。",
+    "zh": "翻译失败，请稍后重试。"
+  },
+  "连接失败，请确认本地网页服务正在运行。": {
+    "en": "Connection failed. Check that the local web server is running.",
+    "ja": "接続できません。ローカル Web サービスの起動を確認してください。",
+    "zh": "连接失败，请确认本地网页服务正在运行。"
+  },
+  "请检查失败栏位的提示。": {
+    "en": "Check the messages in the failed panels.",
+    "ja": "失敗した欄のメッセージを確認してください。",
+    "zh": "请检查失败栏位的提示。"
+  },
+  "待执行": {
+    "en": "Paused",
+    "ja": "実行待ち",
+    "zh": "待执行"
+  },
+  "执行中": {
+    "en": "Running",
+    "ja": "実行中",
+    "zh": "执行中"
+  },
+  "已结束": {
+    "en": "Ended",
+    "ja": "終了",
+    "zh": "已结束"
+  },
+  "调试服务请求失败。": {
+    "en": "Debug service request failed.",
+    "ja": "デバッグサービスへの要求に失敗しました。",
+    "zh": "调试服务请求失败。"
+  },
+  "一步到底执行中：后续步骤不再暂停，仍可结束调试。": {
+    "en": "Running to end: no more pauses. You can still end debugging.",
+    "ja": "最後まで実行中：以降は停止しません。デバッグの終了は可能です。",
+    "zh": "一步到底执行中：后续步骤不再暂停，仍可结束调试。"
+  },
+  "正在执行当前步骤，等待程序到达下一个断点…": {
+    "en": "Running the current step; waiting for the next breakpoint…",
+    "ja": "現在のステップを実行中。次の停止位置を待っています…",
+    "zh": "正在执行当前步骤，等待程序到达下一个断点…"
+  },
+  "调试已结束，尚未执行的步骤不会继续。": {
+    "en": "Debugging ended. Pending steps will not run.",
+    "ja": "デバッグを終了しました。未実行のステップは続行しません。",
+    "zh": "调试已结束，尚未执行的步骤不会继续。"
+  },
+  "本次调试执行结束。": {
+    "en": "This debug run has finished.",
+    "ja": "今回のデバッグ実行は終了しました。",
+    "zh": "本次调试执行结束。"
+  },
+  "正在建立调试会话…": {
+    "en": "Starting a debug session…",
+    "ja": "デバッグセッションを開始中…",
+    "zh": "正在建立调试会话…"
+  },
+  "调试已结束，本组尚未完成。": {
+    "en": "Debugging ended before this pair finished.",
+    "ja": "この組が完了する前にデバッグを終了しました。",
+    "zh": "调试已结束，本组尚未完成。"
+  },
+  "调试已结束。": {
+    "en": "Debugging ended.",
+    "ja": "デバッグを終了しました。",
+    "zh": "调试已结束。"
+  },
+  "安排本组翻译": {
+    "en": "Schedule this pair",
+    "ja": "この組の翻訳を準備",
+    "zh": "安排本组翻译"
+  },
+  "Agent 编排程序按勾选顺序处理组合；此处选择免费或大模型执行路径。": {
+    "en": "Agent processes selected pairs in order and chooses the free or LLM path.",
+    "ja": "Agent が選択順に組を処理し、無料または LLM の経路を選びます。",
+    "zh": "Agent 编排程序按勾选顺序处理组合；此处选择免费或大模型执行路径。"
+  },
+  "交付本组结果": {
+    "en": "Deliver this pair’s results",
+    "ja": "この組の結果を返す",
+    "zh": "交付本组结果"
+  },
+  "把本组的双语文本和说明交给网页；其他未勾选组合不运行。": {
+    "en": "Return bilingual text and notes to the page; unchecked pairs do not run.",
+    "ja": "対訳と説明を画面に返します。未選択の組は実行しません。",
+    "zh": "把本组的双语文本和说明交给网页；其他未勾选组合不运行。"
+  },
+  "加载双语 Skill": {
+    "en": "Load bilingual Skill",
+    "ja": "対訳 Skill を読み込む",
+    "zh": "加载双语 Skill"
+  },
+  "发现可用工具": {
+    "en": "Discover available tools",
+    "ja": "利用可能なツールを取得",
+    "zh": "发现可用工具"
+  },
+  "通过 tools/list 获取真实 MCP Server 提供的工具定义。": {
+    "en": "Use tools/list to discover definitions from the real MCP server.",
+    "ja": "tools/list で実際の MCP サーバーからツール定義を取得します。",
+    "zh": "通过 tools/list 获取真实 MCP Server 提供的工具定义。"
+  },
+  "校验结构化译文": {
+    "en": "Validate structured translation",
+    "ja": "構造化された翻訳を検証",
+    "zh": "校验结构化译文"
+  },
+  "检查两种语言文本、意思解释、关键词和术语参考字段。": {
+    "en": "Validate bilingual text, meaning, keywords and terminology fields.",
+    "ja": "対訳・意味・キーワード・用語参考の各フィールドを確認します。",
+    "zh": "检查两种语言文本、意思解释、关键词和术语参考字段。"
+  },
+  "保留原文": {
+    "en": "Preserve source text",
+    "ja": "原文を保持",
+    "zh": "保留原文"
+  },
+  "请求免费翻译": {
+    "en": "Request free translation",
+    "ja": "無料翻訳を要求",
+    "zh": "请求免费翻译"
+  },
+  "读取组合 Skill": {
+    "en": "Read pair Skill",
+    "ja": "組の Skill を読み込む",
+    "zh": "读取组合 Skill"
+  },
+  "整理词义与用法": {
+    "en": "Prepare terminology notes",
+    "ja": "意味と用法を整理",
+    "zh": "整理词义与用法"
+  },
+  "由程序将 MCP 命中的本地资料整理为说明；这不是大模型生成的语义分析。": {
+    "en": "Format local MCP glossary matches as notes; this is not LLM semantic analysis.",
+    "ja": "MCP が取得したローカル資料を説明として整えます。LLM による意味分析ではありません。",
+    "zh": "由程序将 MCP 命中的本地资料整理为说明；这不是大模型生成的语义分析。"
+  },
+  "启动 MCP 子进程": {
+    "en": "Start MCP subprocess",
+    "ja": "MCP 子プロセスを起動",
+    "zh": "启动 MCP 子进程"
+  },
+  "使用当前 Python 解释器运行 mcp_server.py，建立 stdio 协议通道。": {
+    "en": "Run mcp_server.py with the current Python interpreter and establish stdio transport.",
+    "ja": "現在の Python で mcp_server.py を起動し、stdio 通信を確立します。",
+    "zh": "使用当前 Python 解释器运行 mcp_server.py，建立 stdio 协议通道。"
+  },
+  "初始化 MCP 会话": {
+    "en": "Initialize MCP session",
+    "ja": "MCP セッションを初期化",
+    "zh": "初始化 MCP 会话"
+  },
+  "Client 与 Server 完成协议握手；尚未查询术语。": {
+    "en": "Client and server perform the protocol handshake; no terminology lookup yet.",
+    "ja": "Client と Server がハンドシェイクを行います。用語検索はまだ行いません。",
+    "zh": "Client 与 Server 完成协议握手；尚未查询术语。"
+  },
+  "调用术语工具": {
+    "en": "Call terminology tool",
+    "ja": "用語ツールを呼び出す",
+    "zh": "调用术语工具"
+  },
+  "通过 tools/call 执行 lookup_term；服务端 mcp_server.py 读取本地 glossary.json。": {
+    "en": "Call lookup_term via tools/call; mcp_server.py reads the local glossary.json.",
+    "ja": "tools/call で lookup_term を実行し、mcp_server.py が glossary.json を読み込みます。",
+    "zh": "通过 tools/call 执行 lookup_term；服务端 mcp_server.py 读取本地 glossary.json。"
+  },
+  "请求大模型": {
+    "en": "Request language model",
+    "ja": "言語モデルを呼び出す",
+    "zh": "请求大模型"
+  },
+  "检查模型返回": {
+    "en": "Inspect model response",
+    "ja": "モデルの応答を確認",
+    "zh": "检查模型返回"
+  },
+  "判断模型请求的是工具调用还是最终译文；不展示隐藏推理内容。": {
+    "en": "Determine whether the response is a tool call or final translation; hidden reasoning is not displayed.",
+    "ja": "ツール呼び出しか最終訳文かを判定します。非公開の推論は表示しません。",
+    "zh": "判断模型请求的是工具调用还是最终译文；不展示隐藏推理内容。"
+  },
+  "回传工具结果": {
+    "en": "Return tool result",
+    "ja": "ツール結果を返す",
+    "zh": "回传工具结果"
+  },
+  "用 call_id 将 MCP 查询结果交给模型，随后进入下一轮。": {
+    "en": "Send MCP results back with call_id, then start the next round.",
+    "ja": "call_id を使って MCP の結果をモデルに返し、次のラウンドに進みます。",
+    "zh": "用 call_id 将 MCP 查询结果交给模型，随后进入下一轮。"
+  },
+  "MyMemory 免费翻译": {
+    "en": "MyMemory free translation",
+    "ja": "MyMemory 無料翻訳",
+    "zh": "MyMemory 免费翻译"
+  },
+  "免费联网翻译模式：以上为机器译文；未使用大模型，不生成逐句语义或语气分析。": {
+    "en": "Free online mode: machine translation without an LLM; no sentence-by-sentence meaning or tone analysis.",
+    "ja": "無料オンラインモード：LLM を使わない機械翻訳です。文ごとの意味や語調の分析は行いません。",
+    "zh": "免费联网翻译模式：以上为机器译文；未使用大模型，不生成逐句语义或语气分析。"
+  },
+  "本地术语表未命中，暂无可提供的词义和用法说明。": {
+    "en": "No local glossary matches; no terminology or usage notes are available.",
+    "ja": "ローカル用語集に一致がなく、意味・用法の説明はありません。",
+    "zh": "本地术语表未命中，暂无可提供的词义和用法说明。"
+  },
+  "本次 MCP 本地术语查询未命中。": {
+    "en": "No matches in this MCP glossary lookup.",
+    "ja": "今回の MCP 用語検索に一致はありません。",
+    "zh": "本次 MCP 本地术语查询未命中。"
+  },
+  "免费模式每次最多 1000 字符，请缩短原文后重试。": {
+    "en": "Free mode allows up to 1,000 characters. Shorten the text and retry.",
+    "ja": "無料モードは1回最大1,000文字です。原文を短くして再実行してください。",
+    "zh": "免费模式每次最多 1000 字符，请缩短原文后重试。"
+  },
+  "免费模式每次最多 1000 字符。": {
+    "en": "Free mode allows up to 1,000 characters per request.",
+    "ja": "無料モードは1回最大1,000文字です。",
+    "zh": "免费模式每次最多 1000 字符。"
+  },
+  "免费翻译服务额度已用完或请求受限，请稍后再试。": {
+    "en": "Free translation quota exhausted or requests limited. Try again later.",
+    "ja": "無料翻訳の上限または要求制限に達しました。後でお試しください。",
+    "zh": "免费翻译服务额度已用完或请求受限，请稍后再试。"
+  },
+  "免费翻译服务今日额度已用完，请稍后再试。": {
+    "en": "Today’s free translation quota is exhausted. Try again later.",
+    "ja": "本日の無料翻訳の上限に達しました。後でお試しください。",
+    "zh": "免费翻译服务今日额度已用完，请稍后再试。"
+  },
+  "免费翻译服务暂不支持此请求，请缩短原文或稍后再试。": {
+    "en": "The free service cannot handle this request. Shorten the text or retry later.",
+    "ja": "無料サービスで処理できません。原文を短くするか、後でお試しください。",
+    "zh": "免费翻译服务暂不支持此请求，请缩短原文或稍后再试。"
+  },
+  "免费翻译服务未返回有效译文，请稍后再试。": {
+    "en": "The free service returned no valid translation. Try again later.",
+    "ja": "有効な翻訳が返されませんでした。後でお試しください。",
+    "zh": "免费翻译服务未返回有效译文，请稍后再试。"
+  },
+  "免费翻译服务暂时受限，请稍后再试。": {
+    "en": "The free translation service is temporarily limited. Try again later.",
+    "ja": "無料翻訳サービスが一時的に制限されています。後でお試しください。",
+    "zh": "免费翻译服务暂时受限，请稍后再试。"
+  },
+  "无法连接免费翻译服务或响应无效，请检查网络后重试。": {
+    "en": "Cannot connect to the free translation service, or its response is invalid. Check your network.",
+    "ja": "無料翻訳に接続できないか、応答が無効です。ネットワークを確認してください。",
+    "zh": "无法连接免费翻译服务或响应无效，请检查网络后重试。"
+  },
+  "调试暂停超过 5 分钟，会话已结束，请重新开始。": {
+    "en": "Debugging paused for over 5 minutes. The session ended; start again.",
+    "ja": "停止が5分を超えたためセッションを終了しました。再開してください。",
+    "zh": "调试暂停超过 5 分钟，会话已结束，请重新开始。"
+  },
+  "API Key 无效或没有模型访问权限，请检查后重试。": {
+    "en": "Invalid API key or missing model permission. Check your credentials.",
+    "ja": "API キーが無効か、モデルの権限がありません。設定を確認してください。",
+    "zh": "API Key 无效或没有模型访问权限，请检查后重试。"
+  },
+  "模型不存在、不可用，或不支持当前工具调用及结构化输出。": {
+    "en": "The model is unavailable or does not support the required tools and structured output.",
+    "ja": "モデルが利用できないか、必要なツール呼び出し・構造化出力に非対応です。",
+    "zh": "模型不存在、不可用，或不支持当前工具调用及结构化输出。"
+  },
+  "翻译超时，请缩短原文或稍后重试。": {
+    "en": "Translation timed out. Shorten the text or retry later.",
+    "ja": "翻訳がタイムアウトしました。原文を短くするか、後で再実行してください。",
+    "zh": "翻译超时，请缩短原文或稍后重试。"
+  },
+  "翻译未完成，请检查网络、模型配置或稍后重试。": {
+    "en": "Translation did not finish. Check your network and model settings, or retry later.",
+    "ja": "翻訳が完了しませんでした。通信・モデル設定を確認するか、後で再実行してください。",
+    "zh": "翻译未完成，请检查网络、模型配置或稍后重试。"
+  },
+  "仅接受同源页面请求。": {
+    "en": "Only same-origin requests are accepted.",
+    "ja": "同一オリジンからの要求のみ受け付けます。",
+    "zh": "仅接受同源页面请求。"
+  },
+  "请求必须为 JSON。": {
+    "en": "The request must be JSON.",
+    "ja": "JSON で要求してください。",
+    "zh": "请求必须为 JSON。"
+  },
+  "请求内容过大。": {
+    "en": "Request body is too large.",
+    "ja": "要求内容が大きすぎます。",
+    "zh": "请求内容过大。"
+  },
+  "请检查原文、语言、模型与 API Key；原文限 10000 字符。": {
+    "en": "Check the text, languages, model and API key. Maximum source length: 10,000 characters.",
+    "ja": "原文・言語・モデル・API キーを確認してください。原文は最大10,000文字です。",
+    "zh": "请检查原文、语言、模型与 API Key；原文限 10000 字符。"
+  },
+  "调试请求无效，或现有会话过多；请检查输入并结束旧会话。": {
+    "en": "Invalid debug request or too many sessions. Check input and end old sessions.",
+    "ja": "デバッグ要求が無効か、セッションが多すぎます。入力を確認し、古いセッションを終了してください。",
+    "zh": "调试请求无效，或现有会话过多；请检查输入并结束旧会话。"
+  },
+  "调试会话不存在或已过期，请重新开始。": {
+    "en": "The debug session is missing or expired. Start again.",
+    "ja": "セッションが存在しないか期限切れです。再開してください。",
+    "zh": "调试会话不存在或已过期，请重新开始。"
+  },
+  "会话已结束，无法继续。": {
+    "en": "The session has ended and cannot continue.",
+    "ja": "セッションは終了しており、続行できません。",
+    "zh": "会话已结束，无法继续。"
+  },
+  "控制请求过大。": {
+    "en": "Control request is too large.",
+    "ja": "操作要求が大きすぎます。",
+    "zh": "控制请求过大。"
+  },
+  "步骤序号无效。": {
+    "en": "Invalid step sequence number.",
+    "ja": "ステップ番号が無効です。",
+    "zh": "步骤序号无效。"
+  },
+  "该步骤已放行或尚未暂停，请等待最新状态。": {
+    "en": "This step was already released or is not paused. Wait for the latest status.",
+    "ja": "このステップは実行許可済みか停止中ではありません。最新状態を待ってください。",
+    "zh": "该步骤已放行或尚未暂停，请等待最新状态。"
+  },
+  "未知调试操作。": {
+    "en": "Unknown debug operation.",
+    "ja": "不明なデバッグ操作です。",
+    "zh": "未知调试操作。"
+  },
+  "日语职场寒暄；按语境可能译为你好、辛苦了，或省略。英文候选只适合确实在感谢付出的场景。": {
+    "en": "Japanese workplace greeting; adapt to the context or omit it. The English candidate applies only when thanking someone for their work.",
+    "ja": "日本語の職場の挨拶です。文脈に合わせて訳すか省略します。英語候補は労力への感謝を表す場面に限ります。",
+    "zh": "日语职场寒暄；按语境可能译为你好、辛苦了，或省略。英文候选只适合确实在感谢付出的场景。"
+  },
+  "请求查看或核实；review、check、confirm 的选择取决于希望对方执行的动作。": {
+    "en": "A request to review or verify; choose review, check or confirm according to the action intended.",
+    "ja": "確認や検証の依頼です。review・check・confirm は相手に求める行動に応じて選びます。",
+    "zh": "请求查看或核实；review、check、confirm 的选择取决于希望对方执行的动作。"
+  },
+  "后续联系、追踪或处理；动词通常写 follow up，名词或形容词常写 follow-up。": {
+    "en": "Subsequent contact, tracking or action; use follow up as a verb and follow-up as a noun or adjective.",
+    "ja": "後続の連絡・追跡・対応を指します。動詞は follow up、名詞・形容詞は follow-up が一般的です。",
+    "zh": "后续联系、追踪或处理；动词通常写 follow up，名词或形容词常写 follow-up。"
+  },
+  "コンセント 是和制英语，不能译为 consent；outlet 和 socket 的使用有地区差异。": {
+    "en": "Japanese konsento means a power outlet, not consent; outlet and socket vary by region.",
+    "ja": "「コンセント」は和製英語で consent とは異なります。outlet と socket の用法には地域差があります。",
+    "zh": "コンセント 是和制英语，不能译为 consent；outlet 和 socket 的使用有地区差异。"
+  },
+  "已选择 {0} 组对照，等待输入。": {
+    "zh": "已选择 {0} 组对照，等待输入。",
+    "en": "{0} pairs selected. Ready for input.",
+    "ja": "{0}組を選択中。入力を待っています。"
+  },
+  "正在翻译 {0} 组，请稍候…": {
+    "zh": "正在翻译 {0} 组，请稍候…",
+    "en": "Translating {0} pairs. Please wait…",
+    "ja": "{0}組を翻訳中です。お待ちください…"
+  },
+  "已完成 {0} / {1} 组对照。{2}": {
+    "zh": "已完成 {0} / {1} 组对照。{2}",
+    "en": "Completed {0} / {1} pairs. {2}",
+    "ja": "{0} / {1}組が完了しました。{2}"
+  },
+  "第 {0} 步已暂停 · {1}。点击下一步执行：{2}": {
+    "zh": "第 {0} 步已暂停 · {1}。点击下一步执行：{2}",
+    "en": "Paused at step {0} · {1}. Click Next: {2}",
+    "ja": "ステップ{0}で停止中 · {1}。「次へ」で実行：{2}"
+  },
+  "{0} · 组合 {1} · MCP 本地术语": {
+    "zh": "{0} · 组合 {1} · MCP 本地术语",
+    "en": "{0} · Pair {1} · MCP local glossary",
+    "ja": "{0} · 組 {1} · MCP ローカル用語集"
+  },
+  "Skill / {0} · MCP 术语查询": {
+    "zh": "Skill / {0} · MCP 术语查询",
+    "en": "Skill / {0} · MCP terminology lookup",
+    "ja": "Skill / {0} · MCP 用語検索"
+  },
+  "读取 {0} 的专业规则及共享规则，准备放入模型上下文。": {
+    "zh": "读取 {0} 的专业规则及共享规则，准备放入模型上下文。",
+    "en": "Read specialist rules for {0} and shared rules for the model context.",
+    "ja": "{0}の専用規則と共通規則を読み込み、モデルのコンテキストに準備します。"
+  },
+  "读取 {0} 技能文件以展示组合规则；免费引擎不理解或执行大模型指令。": {
+    "zh": "读取 {0} 技能文件以展示组合规则；免费引擎不理解或执行大模型指令。",
+    "en": "Read the {0} Skill to show pair rules; the free engine does not interpret LLM instructions.",
+    "ja": "{0}の Skill で組の規則を表示します。無料エンジンは LLM 指示を解釈しません。"
+  },
+  "目标语言 {0} 就是原文语言，不发送外部翻译请求。": {
+    "zh": "目标语言 {0} 就是原文语言，不发送外部翻译请求。",
+    "en": "Target {0} matches the source language; no external translation request is sent.",
+    "ja": "対象言語{0}は原文と同じため、外部への翻訳要求は行いません。"
+  },
+  "将当前分句从 {0} 翻译为 {1}；调用 MyMemory，消耗免费服务额度，不调用大模型。": {
+    "zh": "将当前分句从 {0} 翻译为 {1}；调用 MyMemory，消耗免费服务额度，不调用大模型。",
+    "en": "Translate this segment from {0} to {1} with MyMemory. Uses free quota, without an LLM.",
+    "ja": "この文を{0}から{1}へ MyMemory で翻訳します。無料枠を使用し、LLM は呼び出しません。"
+  },
+  "模型循环第 {0} 轮：发送 Skill、请求和工具定义；此步骤可能产生 API 用量。": {
+    "zh": "模型循环第 {0} 轮：发送 Skill、请求和工具定义；此步骤可能产生 API 用量。",
+    "en": "Model round {0}: send Skill, request and tool definitions. API usage may be charged.",
+    "ja": "モデルの{0}回目：Skill・要求・ツール定義を送信します。API 利用料が発生する場合があります。"
+  },
+  "本地独立网页入口：python web.py。只绑定本机，不存储 API Key。": {
+    "zh": "本地独立网页入口：python web.py。只绑定本机，不存储 API Key。",
+    "en": "Insufficient API quota (insufficient_quota / billing limit). Check Billing, balance and organization/project limits. Creating a key does not add quota.",
+    "ja": "API の利用枠が不足しています（insufficient_quota / billing limit）。Billing・残高・組織やプロジェクトの上限を確認してください。キーの作成だけでは利用枠は増えません。"
+  },
+  "API 预付余额已耗尽（credit_balance_exhausted）。请在 API 平台 Billing 检查并补充可用余额；重复请求不会恢复余额。": {
+    "zh": "API 预付余额已耗尽（credit_balance_exhausted）。请在 API 平台 Billing 检查并补充可用余额；重复请求不会恢复余额。",
+    "en": "API prepaid balance exhausted (credit_balance_exhausted). Refill your balance in Billing; retries will not restore it.",
+    "ja": "API 前払い残高がありません（credit_balance_exhausted）。Billing で入金してください。再試行だけでは回復しません。"
+  },
+  "组织 API 消费上限已达到（organization_spend_limit_exceeded）。请联系组织管理员核对消费限制。": {
+    "zh": "组织 API 消费上限已达到（organization_spend_limit_exceeded）。请联系组织管理员核对消费限制。",
+    "en": "Organization spending limit reached (organization_spend_limit_exceeded). Ask your administrator to check the limit.",
+    "ja": "組織の消費上限に達しました（organization_spend_limit_exceeded）。管理者に上限の確認を依頼してください。"
+  },
+  "当前项目 API 消费上限已达到（project_spend_limit_exceeded）。请在项目设置中核对消费限制。": {
+    "zh": "当前项目 API 消费上限已达到（project_spend_limit_exceeded）。请在项目设置中核对消费限制。",
+    "en": "Project spending limit reached (project_spend_limit_exceeded). Check the project spending limit.",
+    "ja": "プロジェクトの消費上限に達しました（project_spend_limit_exceeded）。設定を確認してください。"
+  },
+  "组织 API 用量上限已达到（organization_usage_limit_exceeded）。请在 Limits 核对额度，必要时申请提高限制。": {
+    "zh": "组织 API 用量上限已达到（organization_usage_limit_exceeded）。请在 Limits 核对额度，必要时申请提高限制。",
+    "en": "Organization usage limit reached (organization_usage_limit_exceeded). Check Limits and request an increase if needed.",
+    "ja": "組織の使用上限に達しました（organization_usage_limit_exceeded）。Limits を確認し、必要なら引き上げを申請してください。"
+  },
+  "OpenAI 返回 HTTP 429，但未提供可识别的错误代码。请先检查 API 平台 Billing 和 Limits；若有可用额度，稍后仅勾选一组重试。当前信息无法确定是额度不足还是速率限制。": {
+    "zh": "OpenAI 返回 HTTP 429，但未提供可识别的错误代码。请先检查 API 平台 Billing 和 Limits；若有可用额度，稍后仅勾选一组重试。当前信息无法确定是额度不足还是速率限制。",
+    "en": "OpenAI returned HTTP 429 without a recognized code. Check Billing and Limits; if quota is available, retry one pair later. The cause is uncertain.",
+    "ja": "OpenAI が識別可能なコードなしで HTTP 429 を返しました。Billing と Limits を確認し、残量があれば後で1組を再実行してください。原因は未確定です。"
+  },
+  "API 可用额度不足（insufficient_quota / billing limit）。请在 OpenAI API 平台检查 Billing、余额、组织/项目及用量限制。单纯等待或重复点击通常无法解决；创建 API Key 不代表已有可用额度。": {
+    "zh": "API 可用额度不足（insufficient_quota / billing limit）。请在 OpenAI API 平台检查 Billing、余额、组织/项目及用量限制。单纯等待或重复点击通常无法解决；创建 API Key 不代表已有可用额度。",
+    "en": "Insufficient API quota (insufficient_quota / billing limit). Check Billing, balance and organization/project limits. Creating a key does not add quota.",
+    "ja": "API の利用枠が不足しています（insufficient_quota / billing limit）。Billing・残高・組織やプロジェクトの上限を確認してください。キーの作成だけでは利用枠は増えません。"
+  },
+  "触发 API 速率限制（rate_limit_exceeded / slow_down）。请稍后重试，先只勾选一组、缩短原文，并在 API 平台 Limits 查看限制。": {
+    "zh": "触发 API 速率限制（rate_limit_exceeded / slow_down）。请稍后重试，先只勾选一组、缩短原文，并在 API 平台 Limits 查看限制。",
+    "en": "API rate limit reached. Retry later with one pair and shorter text; check Limits.",
+    "ja": "API の速度制限に達しました。後で短い原文と1組で再実行し、Limits を確認してください。"
+  },
+  "English": {
+    "en": "English",
+    "zh": "英文",
+    "ja": "英語"
+  },
+  "LIVE EXECUTION": {
+    "en": "LIVE EXECUTION",
+    "zh": "实时执行",
+    "ja": "リアルタイム実行"
+  },
+  "DEBUG": {
+    "en": "DEBUG",
+    "zh": "调试",
+    "ja": "デバッグ"
+  },
+  "Engine": {
+    "en": "Engine",
+    "zh": "翻译引擎",
+    "ja": "翻訳エンジン"
+  }
+}

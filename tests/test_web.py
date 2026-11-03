@@ -1,4 +1,7 @@
-"""网页版 API 与 Skill 选择回归；不访问线上模型。"""
+"""English: Test local web APIs, pair selection, credential isolation and sanitized provider errors without calling a live language model.
+日本語：実際のモデルを呼ばず、ローカル Web API・組の選択・キー分離・安全なエラー表示を検証します。
+中文：不调用线上模型，测试本地网页 API、组合选择、凭据隔离和脱敏错误提示。
+"""
 import json
 import unittest
 from unittest.mock import AsyncMock, patch
@@ -22,7 +25,7 @@ class WebTests(unittest.TestCase):
     def test_page_and_assets(self):
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
-        self.assertIn("中日对照", response.text)
+        self.assertIn("Chinese–Japanese", response.text)
         self.assertEqual(response.text.count('type="checkbox"'), 4)
         self.assertEqual(response.text.count('value="zh-ja" checked'), 1)
         self.assertEqual(response.headers["cache-control"], "no-store")
