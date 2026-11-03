@@ -1,6 +1,6 @@
 # v3.2.0：通过翻译产品理解执行流程
 
-日期：2026-11-03（日本时间）。本地目录：`C:\AI-Study\Test-Agent-Skill-MCP`。提交目标：`current-draft`。
+日期：2026-11-03（日本时间）。本地目录：`Test-Agent-Skill-MCP`。提交目标：`current-draft`。
 
 ## 页面变化
 
@@ -14,7 +14,7 @@
 ## 更新与运行
 
 ```powershell
-cd C:\AI-Study\Test-Agent-Skill-MCP
+cd Test-Agent-Skill-MCP
 git switch current-draft
 git pull --ff-only origin current-draft
 .\.venv\Scripts\python.exe web.py

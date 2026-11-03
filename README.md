@@ -1,11 +1,12 @@
-# 通过翻译产品理解 Agent、Skill、MCP：v3.2.0
+# 通过翻译产品理解 Agent、Skill、MCP：v3.4.0
 
 ## 版本信息
 
-当前功能版本为 **v3.2.0（流程学习入口版）**。完整历史见 [CHANGELOG.md](CHANGELOG.md)。以下版本号记录开发阶段及对应代码提交，不代表已发布同名 Git 标签或 GitHub Release。
+当前功能版本为 **v3.4.0（公开使用说明版）**。完整历史见 [CHANGELOG.md](CHANGELOG.md)。以下版本号记录开发阶段及对应代码提交，不代表已发布同名 Git 标签或 GitHub Release。
 
 | 版本 | 名称 | 主要变化 | 验证结果 | 对应代码提交 |
 |---|---|---|---|---|
+| v3.4.0 | 公开使用说明版 | 可移植目录、完整启动步骤、三语 AGENTS.md | 41 项测试通过 | [说明](docs/web-v3.4.md) |
 | v3.2.0 | 流程学习入口版 | 更新学习主题标题、移除介绍区、默认开启流程调试 | 41 项测试通过 | [5e1d785](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/5e1d785e607820f4c665345478d85bbec1ac6e0e) |
 | v3.1.0 | 可调宽流程调试版 | 半屏可拖拽流程面板、底部固定按钮、一步到底 | 41 项测试通过 | [0be2caa](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/0be2caa4645569198384957c3f63b6d8addad6f8) |
 | v3.0.0 | 流程调试版 | 可选右侧流程图、真实下一步、Agent/Skill/MCP 标识及代码行 | 39 项测试通过 | [67d14da](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/67d14dac1c8401b131b23b79f59e02568d9189a7) |
@@ -13,6 +14,40 @@
 | v2.0.1 | 错误提示修正版 | 区分余额、消费/用量上限与请求限速 | 10 项网页相关测试通过 | [aa0b05d](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/aa0b05df0c233fa18c44f9543c3801706dad681a) |
 | v2.0.0 | 网页版 | 三栏对照、组合勾选、模型选择与 Key 输入 | 20 项测试通过 | [dab1e10](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/dab1e10c020f77103a67226f37515a18886d2da3) |
 | v1.0.0 | 命令行版 | 一个 Agent、三个双向 Skill、真实 MCP 术语查询 | 11 项测试通过 | [2fc5751](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/2fc5751ea45c93ee2fa294e4d0d645b572f06f07) |
+
+## v3.4.0：首次安装并启动 Agent
+
+需要 Git 和 Python 3.11+（推荐 3.12）。可在任意自己选择的父目录克隆项目；不要求固定磁盘或用户名。所有相对路径均以克隆后的项目根目录为基准。
+
+**Windows PowerShell：**
+
+```powershell
+git clone --branch current-draft https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP.git
+cd Test-Agent-Skill-MCP
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe web.py
+```
+
+**macOS / Linux：**
+
+```bash
+git clone --branch current-draft https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP.git
+cd Test-Agent-Skill-MCP
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python web.py
+```
+
+浏览器打开 **[http://127.0.0.1:8000](http://127.0.0.1:8000)**。`web.py` 是网页 Agent 的启动入口：保持终端运行，在页面输入原文和源语言，勾选对照组合，点击“开始对照翻译”，才会执行一次 Agent 任务。流程调试默认开启，需点击底部“下一步”逐步执行，或“一步到底”完成整个任务；取消“显示流程图 · 单步调试”则直接翻译。
+
+默认不选模型、不填 API Key 即可使用联网免费翻译。Agent 自动加载对应 Skill 并启动 MCP 子进程，无需另开终端启动 `mcp_server.py`。免费模式会向 MyMemory 发送原文，不使用大模型；同时提供模型和 Key 后使用 OpenAI 模式。
+
+按 **Ctrl+C** 停止服务。下次使用只需进入项目根目录，运行上述 `web.py` 启动命令，再打开浏览器。端口占用可在启动命令后追加 `--port 8002`，然后访问 `http://127.0.0.1:8002`。
+
+已有克隆更新时，先停止服务，在项目根目录执行 `git switch current-draft`、`git pull --ff-only origin current-draft`，并用虚拟环境的 Python 重新安装 `requirements.txt`，再启动服务。命令行 Agent 的启动方式见下方“先运行无需密钥的演示”和“配置并运行真实翻译”；CLI 的 `--demo` 只检查 Skill/MCP，不生成译文。
+
+本版移除所有仓库文件中的机器固定目录，提供面向首次使用者的启动步骤，并新增中、英、日三语 [AGENTS.md](AGENTS.md)。版本说明见 [v3.4.0](docs/web-v3.4.md)。
 
 ## v3.2.0 更新
 
@@ -22,7 +57,7 @@
 - 开始翻译后点击“下一步”或“一步到底”；取消勾选仍可直接翻译。
 - 保留半屏可拖拽布局、底部固定按钮、免费翻译及可选模型/Key。
 
-本地目录为 `C:\AI-Study\Test-Agent-Skill-MCP`，后续提交目标为 `current-draft`。详细说明见 [v3.2.0 使用与验证记录](docs/web-v3.2.md)。
+项目可克隆到任意目录，以下命令均从项目根目录执行。开发提交目标为 `current-draft`。详细说明见 [v3.2.0 使用与验证记录](docs/web-v3.2.md)。
 
 ## v3.1.0 更新
 
@@ -52,12 +87,9 @@
 
 第二版已提供本地独立运行的网页：**左侧中日对照、中间中英对照、右侧日英对照**。三组默认勾选，可取消任意组合；只会为选中的组合调用 Agent、Skill 和 MCP。
 
-已安装初版的 Windows 用户，在 PowerShell 执行：
+已完成下方安装后，在项目根目录的 PowerShell 中启动 Agent 网页服务：
 
 ```powershell
-cd C:\AI-Study\Test-Agent-Skill-MCP
-git pull --ff-only
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe web.py
 ```
 
@@ -98,6 +130,9 @@ git pull --ff-only
 
 ```text
 Test-Agent-Skill-MCP/
+├── AGENTS.md                 # English / 日本語 / 中文协作说明
+├── web.py                    # 网页 Agent 启动入口
+├── static/                   # 网页与流程调试界面
 ├── main.py                   # 命令行入口、环境配置、错误提示
 ├── agent.py                  # 请求校验、Skill 加载、模型与工具循环
 ├── skill_router.py           # 六个方向映射到三个 Skill
@@ -152,7 +187,7 @@ Skill 以文本指令进入模型上下文。它不是独立模型，也不是�
 ### Windows PowerShell
 
 ```powershell
-git clone https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP.git
+git clone --branch current-draft https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP.git
 cd Test-Agent-Skill-MCP
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
@@ -165,7 +200,7 @@ python -m venv .venv
 ### macOS / Linux
 
 ```bash
-git clone https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP.git
+git clone --branch current-draft https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP.git
 cd Test-Agent-Skill-MCP
 python3 -m venv .venv
 source .venv/bin/activate

@@ -7,7 +7,7 @@
 在旧服务终端按 Ctrl+C，然后运行：
 
 ```powershell
-cd C:\AI-Study\Test-Agent-Skill-MCP
+cd Test-Agent-Skill-MCP
 git pull --ff-only
 .\.venv\Scripts\python.exe web.py
 ```

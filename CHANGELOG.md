@@ -1,11 +1,12 @@
 # 版本记录
 
-本项目采用以下版本号记录已确认的开发阶段。各阶段日期见对应记录（日本时间）。当前功能版本：**v3.2.0**。
+本项目采用以下版本号记录已确认的开发阶段。各阶段日期见对应记录（日本时间）。当前功能版本：**v3.4.0**。
 
 表中的链接指向各阶段完成时的不可变代码提交。本文件是版本说明，不代表已创建同名 Git 标签或正式 GitHub Release；文档维护提交也不会改变上述功能版本对应的代码提交。
 
 | 版本 | 名称 | 主要变化 | 验证结果 | 对应代码提交 |
 |---|---|---|---|---|
+| v3.4.0 | 公开使用说明版 | 可移植目录、完整启动步骤、三语 AGENTS.md | 41 项测试通过 | [说明](docs/web-v3.4.md) |
 | v3.2.0 | 流程学习入口版 | 更新学习主题标题、移除介绍区、默认开启流程调试 | 41 项测试通过 | [5e1d785](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/5e1d785e607820f4c665345478d85bbec1ac6e0e) |
 | v3.1.0 | 可调宽流程调试版 | 半屏可拖拽流程面板、底部固定按钮、一步到底 | 41 项测试通过 | [0be2caa](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/0be2caa4645569198384957c3f63b6d8addad6f8) |
 | v3.0.0 | 流程调试版 | 可选右侧流程图、真实下一步、Agent/Skill/MCP 标识及代码行 | 39 项测试通过 | [67d14da](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/67d14dac1c8401b131b23b79f59e02568d9189a7) |
@@ -13,6 +14,17 @@
 | v2.0.1 | 错误提示修正版 | 区分余额、消费/用量上限与请求限速 | 10 项网页相关测试通过 | [aa0b05d](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/aa0b05df0c233fa18c44f9543c3801706dad681a) |
 | v2.0.0 | 网页版 | 三栏对照、组合勾选、模型选择与 Key 输入 | 20 项测试通过 | [dab1e10](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/dab1e10c020f77103a67226f37515a18886d2da3) |
 | v1.0.0 | 命令行版 | 一个 Agent、三个双向 Skill、真实 MCP 术语查询 | 11 项测试通过 | [2fc5751](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/2fc5751ea45c93ee2fa294e4d0d645b572f06f07) |
+
+## v3.4.0 — 公开使用说明版
+
+日期：2026-11-03（日本时间）。提交分支：`current-draft`。
+
+- 移除仓库文件中的机器固定目录，改用项目相对路径，历史文档也同步清理。
+- 安装说明面向首次使用者，提供 Windows 与 macOS/Linux 的克隆、虚拟环境、依赖安装和网页 Agent 启动命令。
+- 明确浏览器访问地址、触发 Agent 任务、默认调试操作、停止和再次启动的方法，以及 MCP 自动启动机制。
+- 新增项目根目录 `AGENTS.md`，提供英文、日文和中文的开发协作说明。
+- 页面版本标记更新为 v3.4.0。历史版本号保留原有记录；未创建 v3.3.0 记录。
+- 验证范围和使用说明见 [v3.4.0 记录](docs/web-v3.4.md)。
 
 ## v3.2.0 — 流程学习入口版
 

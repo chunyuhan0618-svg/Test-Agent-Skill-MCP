@@ -7,7 +7,7 @@ v3.1.0 已追加半屏可拖拽布局、底部固定按钮与一步到底，详�
 更新并启动（先在旧服务终端按 Ctrl+C）：
 
 ```powershell
-cd C:\AI-Study\Test-Agent-Skill-MCP
+cd Test-Agent-Skill-MCP
 git pull --ff-only
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe web.py
