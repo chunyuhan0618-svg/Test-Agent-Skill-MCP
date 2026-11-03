@@ -1,17 +1,28 @@
-# 言间 · 中日英翻译 Agent：网页版 v3.1.0 + Skills + MCP
+# 通过翻译产品理解 Agent、Skill、MCP：v3.2.0
 
 ## 版本信息
 
-当前功能版本为 **v3.1.0（可调宽流程调试版）**。完整历史见 [CHANGELOG.md](CHANGELOG.md)。以下版本号记录开发阶段及对应代码提交，不代表已发布同名 Git 标签或 GitHub Release。
+当前功能版本为 **v3.2.0（流程学习入口版）**。完整历史见 [CHANGELOG.md](CHANGELOG.md)。以下版本号记录开发阶段及对应代码提交，不代表已发布同名 Git 标签或 GitHub Release。
 
 | 版本 | 名称 | 主要变化 | 验证结果 | 对应代码提交 |
 |---|---|---|---|---|
+| v3.2.0 | 流程学习入口版 | 更新学习主题标题、移除介绍区、默认开启流程调试 | 41 项测试通过 | [v3.2.0 说明](docs/web-v3.2.md) |
 | v3.1.0 | 可调宽流程调试版 | 半屏可拖拽流程面板、底部固定按钮、一步到底 | 41 项测试通过 | [0be2caa](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/0be2caa4645569198384957c3f63b6d8addad6f8) |
 | v3.0.0 | 流程调试版 | 可选右侧流程图、真实下一步、Agent/Skill/MCP 标识及代码行 | 39 项测试通过 | [67d14da](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/67d14dac1c8401b131b23b79f59e02568d9189a7) |
 | v2.1.0 | 免费翻译版 | 模型与 API Key 改为选填，默认免费翻译 | 28 项测试通过 | [f858aa9](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/f858aa9bbd1461b33fbe8347bb97337b68ac9a4d) |
 | v2.0.1 | 错误提示修正版 | 区分余额、消费/用量上限与请求限速 | 10 项网页相关测试通过 | [aa0b05d](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/aa0b05df0c233fa18c44f9543c3801706dad681a) |
 | v2.0.0 | 网页版 | 三栏对照、组合勾选、模型选择与 Key 输入 | 20 项测试通过 | [dab1e10](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/dab1e10c020f77103a67226f37515a18886d2da3) |
 | v1.0.0 | 命令行版 | 一个 Agent、三个双向 Skill、真实 MCP 术语查询 | 11 项测试通过 | [2fc5751](https://github.com/chunyuhan0618-svg/Test-Agent-Skill-MCP/commit/2fc5751ea45c93ee2fa294e4d0d645b572f06f07) |
+
+## v3.2.0 更新
+
+- 页首改为“通过一个翻译产品来理解 Agent，SKILL，MCP的流程。”。
+- 移除原品牌标题及上方宣传介绍区，直接进入翻译与流程学习工作台。
+- “显示流程图 · 单步调试”默认选中，打开页面即可看到流程和代码面板。
+- 开始翻译后点击“下一步”或“一步到底”；取消勾选仍可直接翻译。
+- 保留半屏可拖拽布局、底部固定按钮、免费翻译及可选模型/Key。
+
+本地目录为 `C:\AI-Study\Test-Agent-Skill-MCP`，后续提交目标为 `current-draft`。详细说明见 [v3.2.0 使用与验证记录](docs/web-v3.2.md)。
 
 ## v3.1.0 更新
 
@@ -24,10 +35,10 @@
 
 ## V3 流程调试快速开始
 
-第三版新增可选的 **显示流程图 · 单步调试**。默认关闭，普通翻译不受影响。
+当前版本的 **显示流程图 · 单步调试** 默认开启。取消勾选可隐藏面板并使用普通翻译。
 
 1. 按下方命令更新并运行 `web.py`，刷新浏览器页面。
-2. 勾选“显示流程图 · 单步调试”，选择需要的翻译组合后开始。
+2. 保持默认选中的“显示流程图 · 单步调试”，选择需要的翻译组合后开始。
 3. 右侧按真实执行顺序显示 **Agent / Skill / MCP / Engine** 节点。
 4. 程序在关键步骤前暂停，点击 **下一步** 才继续；代码区显示真实文件名、行号并高亮下一条操作。
 5. Skill 节点可以查看指令原文；点击历史节点可以回看代码。

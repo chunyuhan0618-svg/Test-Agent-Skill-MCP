@@ -1,12 +1,11 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>言间 · 中日英对照工作台</title><link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="/static/debug.css"><script src="/static/debug.js" defer></script><script src="/static/app.js" defer></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>通过翻译产品理解 Agent、Skill、MCP 的流程</title><link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="/static/debug.css"><script src="/static/debug.js" defer></script><script src="/static/app.js" defer></script></head>
 <body>
 <main>
-  <header><a class="brand" href="/">言间<span>LINGUA WORKSPACE</span></a><span class="version">v3.1.0 · 流程调试</span></header>
-  <section class="intro"><p class="eyebrow">WORDS, WITH CONTEXT.</p><h1>跨越语言，读懂意思。</h1><p>一份原文，三组对照。让译文、语气与用法，在同一画面里清晰展开。</p></section>
-  <div class="debug-toolbar"><label><input id="debug-toggle" type="checkbox"> 显示流程图 · 单步调试</label><span>勾选后，点击“下一步”才执行当前步骤。</span></div>
-  <div id="workspace" class="workspace"><div class="translation-space">
+  <header><h1 class="page-title">通过一个翻译产品来理解 Agent，SKILL，MCP的流程。</h1><span class="version">v3.2.0 · 流程调试</span></header>
+  <div class="debug-toolbar"><label><input id="debug-toggle" type="checkbox" checked> 显示流程图 · 单步调试</label><span>默认启用，开始后点击“下一步”；取消勾选可直接翻译。</span></div>
+  <div id="workspace" class="workspace debug-enabled"><div class="translation-space">
   <form id="form">
     <section class="settings panel" aria-label="模型设置">
       <div><label for="model">大语言模型 <span>选填</span></label><select id="model"><option value="">不指定模型 · 免费翻译</option><option value="gpt-4.1-mini">GPT-4.1 mini</option><option value="gpt-4.1">GPT-4.1</option><option value="gpt-4o-mini">GPT-4o mini</option><option value="custom">自定义模型 ID…</option></select></div>
@@ -28,8 +27,8 @@
     <article class="result panel" data-pair="en-ja"><div class="result-head"><div><span class="pair-index">03 / JA · EN</span><h2>日英对照</h2></div><span class="badge">待翻译</span></div><div class="result-body"><div class="empty"><span>日 / EN</span><p>看懂语序、敬语与微妙的语气。</p></div></div></article>
   </section>
   </div>
-  <div id="debug-resizer" class="debug-resizer" role="separator" aria-label="调整流程图宽度" aria-orientation="vertical" aria-valuemin="30" aria-valuemax="70" aria-valuenow="50" tabindex="0" hidden><span></span></div>
-  <aside id="debug-panel" class="debug-panel panel" hidden aria-label="程序执行流程">
+  <div id="debug-resizer" class="debug-resizer" role="separator" aria-label="调整流程图宽度" aria-orientation="vertical" aria-valuemin="30" aria-valuemax="70" aria-valuenow="50" tabindex="0"><span></span></div>
+  <aside id="debug-panel" class="debug-panel panel" aria-label="程序执行流程">
     <div class="debug-scroll" id="debug-scroll">
     <div class="debug-heading"><div><p class="eyebrow">LIVE EXECUTION</p><h2>看见程序如何工作</h2></div><span class="badge">DEBUG</span></div>
     <p class="debug-intro">Agent 负责推进，Skill 提供规则，MCP 连接工具。免费模式由程序编排，不会调用大模型。</p>

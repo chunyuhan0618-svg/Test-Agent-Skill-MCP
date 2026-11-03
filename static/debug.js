@@ -70,13 +70,14 @@ debug$('#debug-continue').addEventListener('click',async()=>{
   try{drawDebug(await debugRequest(`/api/debug/${debugJob}/continue`,{}));}
   catch(error){debug$('#debug-state').textContent=error.message;debugSignature='';}
 });
-debug$('#debug-toggle').addEventListener('change',()=>{
+function updateDebugVisibility(){
   const enabled=debug$('#debug-toggle').checked;
   debug$('#debug-panel').hidden=!enabled;debug$('#workspace').classList.toggle('debug-enabled',enabled);
   debug$('#debug-resizer').hidden=!enabled;
   if(enabled)requestAnimationFrame(sizeDebugPanel);
   if(!enabled&&debugJob)cancelDebug();
-});
+}
+debug$('#debug-toggle').addEventListener('change',updateDebugVisibility);
 
 // 分隔条只调整布局，不改变调试任务。比例存在当前页面内存中。
 const resizer=debug$('#debug-resizer'),workspace=debug$('#workspace');
@@ -118,3 +119,6 @@ resizer.addEventListener('keydown',event=>{
 });
 window.addEventListener('scroll',queuePanelSize,{passive:true});
 window.addEventListener('resize',()=>{if(window.innerWidth>900)applyDebugRatio(debugRatio);queuePanelSize();},{passive:true});
+
+// 页面首次加载时同步默认勾选状态，面板、分隔条及高度无需等待 change 事件。
+updateDebugVisibility();
